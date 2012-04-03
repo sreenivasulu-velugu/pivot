@@ -9,7 +9,7 @@ gem "omniauth", ">= 1.0.3"
 gem "omniauth-linkedin"
 gem "bootstrap-sass", ">= 2.0.1"
 gem 'jquery-rails'
-gem "haml", ">= 3.1.4"
+gem 'slim'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -18,7 +18,7 @@ group :assets do
 end
 
 group :development do
-  gem "haml-rails", ">= 0.3.4"
+  gem "slim-rails", ">= 0.3.4"
   gem "rspec-rails", ">= 2.9.0.rc2"
   gem "factory_girl_rails", ">= 3.0.0"
   gem "guard", ">= 0.6.2"
@@ -42,7 +42,7 @@ group :test do
 end
 
 group :production do
-
+  gem 'pg'
 end
 
 case HOST_OS
