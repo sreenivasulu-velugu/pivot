@@ -135,6 +135,7 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+    pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -239,6 +240,7 @@ DEPENDENCIES
   mongoid-rspec (>= 1.4.4)
   omniauth (>= 1.0.3)
   omniauth-linkedin
+  pg
   rails (= 3.2.2)
   rb-inotify
   rspec-rails (>= 2.9.0.rc2)
