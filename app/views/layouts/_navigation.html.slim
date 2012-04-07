@@ -1,8 +1,12 @@
 = link_to "Pivotit", root_path, :class => 'brand'
+- if user_signed_in?
+	= link_to('Dashboard',user_path(current_user.id))
 ul.nav.pull-right
   - if user_signed_in?
+    /!li
+      Logged in as #{current_user.name}
     li
-      | Logged in as #{current_user.name}
+    	= link_to('Edit Account', edit_user_path(current_user))
     li
       = link_to('Logout', signout_path)
   - else

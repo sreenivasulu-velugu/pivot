@@ -1,10 +1,20 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   field :provider, :type => String
   field :uid, :type => String
   field :name, :type => String
   field :email, :type => String
-  attr_accessible :provider, :uid, :name, :email
+  field :role, :type => String
+  field :company_name, :type => String
+  field :last_access_time, :type => Time
+  # last_access_times just here for history, not used
+  field :last_access_times, :type => Array, :default => []
+
+
+
+  attr_accessible :provider, :uid, :name, :email, :role, :company_name, :last_access_time, :last_access_times
 
   def self.create_with_omniauth(auth)
     create! do |user|

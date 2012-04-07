@@ -1,5 +1,24 @@
-= form_for(@user) do |f|
-  = f.label :email
-  = f.text_field :email
-  | br/
-  = f.submit "Sign in"
+
+h2 Welcome 
+h3= @user.name
+br
+
+.span4
+	br
+	- if session[:image_url]
+		img src="#{session[:image_url]}" alt="PrifilePic"
+	- else
+		= image_tag('profile_pic.png')
+
+	p Email: 
+	- if @user.email
+		= @user.email
+	br
+	p Role:
+	- if @user.role
+		= @user.role
+	br
+	p Company name:
+	- if @user.company_name
+		= @user.company_name
+.span6		
