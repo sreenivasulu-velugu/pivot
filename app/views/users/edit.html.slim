@@ -1,24 +1,26 @@
-.span3
-	h2 Welcome 
-	h3= @user.name
-	br
-	- if session[:image_url]
-		img src="#{session[:image_url]}" alt="PrifilePic"
-	- else
-		= image_tag('profile_pic.png')
+.content_white
+	.span3
+		h2 Welcome 
+		h3= @user.name
+		br
+		- if session[:image_url]
+			img src="#{session[:image_url]}" alt="PrifilePic"
+		- else
+			= image_tag('profile_pic.png')
 
-.span6
+	.span6
 
-	h3 Please Fill the following details.
+		h3 Please Fill the following details.
 
-	= form_for(@user) do |f|
-	  = f.label :email
-	  = f.text_field :email
-	  br
-	  = f.label :role
-	  = f.select :role, [["Business User","Business User"],["Product Manger","Product Manger"]]
-	  br
-	  = f.label :company_name
-	  = f.text_field :company_name
-	  br
-	  = f.submit "Update", :class =>'btn btn-success btn-large'
+		= form_for(@user) do |f|
+		  = f.label :email
+		  = f.text_field :email
+		  br
+		  = f.label :role
+		  = f.select :role, [["Business User","Business User"],["Product Manger","Product Manger"]]
+		  br
+		  = f.label :company_name
+		  = f.text_field :company_name
+		  br
+		  = f.submit "Update", :class =>'btn btn-success btn-large'
+	.clearfix

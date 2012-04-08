@@ -8,6 +8,7 @@ html
     meta content="" name="description"
     meta content="" name="author"
     = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
@@ -18,12 +19,12 @@ html
           = render 'layouts/navigation'
     #main role="main"
       .container
+        - flash.each do |name, msg|
+          div class="alert alert-#{name == :notice ? 'success' : 'error'}"
+            a.close href="#" data-dismiss="alert" ×
+            = msg
+      .container
         .content
-          .row
-            .span12
-              - flash.each do |name, msg|
-                div class="alert alert-#{name == :notice ? 'success' : 'error'}"
-                  a.close href="#" data-dismiss="alert" ×
-                  = msg
-              = yield
-          footer
+          = yield
+          .clearfix
+        footer

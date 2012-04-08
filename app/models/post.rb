@@ -5,15 +5,14 @@
 class Post
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :title, :type => String
-  field :body, :type => text
-  field :user_id, :type => integer
-  field :file, :type => binary
-  field :link_url, :type => text
-  field :likes_count, :type => integer
-  field :reshares_count, :type => integer
-  field :public, :type => boolean
-  field :comments_count, :type => integer
+  field :title
+  field :content
+  field :user_id, :type => Integer
+  field :file, :type => Binary
+  field :link_url
+  field :likes_count, :type => Integer
+  field :reshares_count, :type => Integer
+  field :comments_count, :type => Integer
   
     
 

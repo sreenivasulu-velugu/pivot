@@ -1,48 +1,27 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
-#   licensed under the Affero General Public License version 3 or later.  See
-#   the COPYRIGHT file.
 
-require Rails.root.join("app", "presenters", "post_presenter")
 
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => :show
+  before_filter :authenticate_user!
   before_filter :set_format_if_malformed_from_status_net, :only => :show
 
-  respond_to :html,
-             :mobile,
-             :json,
-             :xml
+
+  def new
+    @post = Post.new
+  end
+  
+  def create
+    #render :text => params.inspect;return
+    unless params[:post].blank?
+      @post = Post.create(params[:post])
+      respond_to do |format|
+        format.js {}
+        format.json { render :nothing => true, :status => 204 }
+        format.all {redirect_to user_path}
+      end
+    end
+  end
 
   def show
-    key = params[:id].to_s.length <= 8 ? :id : :guid
-
-    if user_signed_in?
-      @post = current_user.find_visible_shareable_by_id(Post, params[:id], :key => key)
-    else
-      @post = Post.where(key => params[:id], :public => true).includes(:author, :comments => :author).first
-    end
-
-    if @post
-      # @commenting_disabled = can_not_comment_on_post?
-      # mark corresponding notification as read
-      if user_signed_in? && notification = Notification.where(:recipient_id => current_user.id, :target_id => @post.id).first
-        notification.unread = false
-        notification.save
-      end
-
-      respond_to do |format|
-        format.xml{ render :xml => @post.to_diaspora_xml }
-        format.mobile{render 'posts/show.mobile.haml'}
-        format.json{ render :json => PostPresenter.new(@post, current_user).to_json }
-        format.any{render 'posts/show.html.haml', :layout => 'layouts/post'}
-      end
-
-    else
-      user_id = (user_signed_in? ? current_user : nil)
-      Rails.logger.info(":event => :link_to_nonexistent_post, :ref => #{request.env['HTTP_REFERER']}, :user_id => #{user_id}, :post_id => #{params[:id]}")
-      flash[:error] = I18n.t('posts.show.not_found')
-      redirect_to :back
-    end
   end
 
   def destroy

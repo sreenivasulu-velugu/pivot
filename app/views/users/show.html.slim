@@ -1,26 +1,44 @@
-
-h2 Welcome 
-h3= @user.name
-br
-
-.span4
-	br
-	- if session[:image_url]
-		img src="#{session[:image_url]}" alt="PrifilePic"
-	- else
-		= image_tag('profile_pic.png')
-
-	p Email: 
-	- if @user.email
-		= @user.email
-	br
-	p Role:
-	- if @user.role
-		= @user.role
-	br
-	p Company name:
-	- if @user.company_name
-		= @user.company_name
-
-.span5
+.content_white
+	.pull-left
+		- if session[:image_url]
+			img src="#{session[:image_url]}" alt="PrifilePic"
+		- else
+			= image_tag('profile_pic.png')
 	
+	.span4.pull-left
+		- if current_user
+			h3= link_to @user.name, edit_user_path
+		- else
+			h3= @user.name
+
+		= beautify_params 'Email', @user.email, 120
+		= beautify_params 'Role', @user.role, 120
+		= beautify_params 'Company Name', @user.company_name, 120
+	
+	.span2.pull-right
+		= link_to 'Edit your profile', edit_user_path, :class => 'btn btn-primary'
+		p 
+			b 576&nbsp;
+			span.light_text Pivots
+		p 
+			b 576&nbsp;
+			span.light_text Followers
+		p 
+			b 576&nbsp;
+			span.light_text Following
+	.clearfix
+
+.left_container
+	.menu
+		ul
+			li.first Pivots
+			li Following
+			li Followers
+			li Favorites
+			li.last Likes
+.right_container
+	.content_white
+		= render :partial =>'posts/form'
+		ul id="pivots"
+			- @posts.each do |post|
+				= render :partial =>'posts/show', :locals => { :p => post }
