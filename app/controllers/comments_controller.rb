@@ -1,32 +1,12 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
-#   licensed under the Affero General Public License version 3 or later.  See
-#   the COPYRIGHT file.
-
 class CommentsController < ApplicationController
-  include ApplicationHelper
-  before_filter :authenticate_user!, :except => [:index]
+  before_filter :authenticate_user!
 
   respond_to :html,
              :mobile,
              :json
 
-  rescue_from ActiveRecord::RecordNotFound do
-    render :nothing => true, :status => 404
-  end
-
   def create
-    post = current_user.find_visible_shareable_by_id(Post, params[:post_id])
-    @comment = current_user.comment!(post, params[:text]) if post
-
-    if @comment
-      respond_to do |format|
-        format.json{ render :json => @comment.as_api_response(:backbone), :status => 201 }
-        format.html{ render :nothing => true, :status => 201 }
-        format.mobile{ render :partial => 'comment', :locals => {:post => @comment.post, :comment => @comment} }
-      end
-    else
-      render :nothing => true, :status => 422
-    end
+    
   end
 
   def destroy
@@ -50,16 +30,6 @@ class CommentsController < ApplicationController
     render :layout => false
   end
 
-  def index
-    find_post
-    raise(ActiveRecord::RecordNotFound.new) unless @post
-
-    @comments = @post.comments.for_a_stream
-    respond_with do |format|
-      format.json  { render :json => @comments.as_api_response(:backbone), :status => 200 }
-      format.mobile{render :layout => false}
-    end
-  end
 
   protected
 

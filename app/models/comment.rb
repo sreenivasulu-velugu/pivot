@@ -3,9 +3,9 @@ class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
   field :content
-  field :post_id, :type => integer
-  field :user_id, :type => integer
-  field :likes_count, :type => integer
+  field :post_id, :type => Integer
+  field :user_id, :type => Integer
+  field :likes_count, :type => Integer
   
   validates :content, :presence => true, :length => {:maximum => 65535}
    
