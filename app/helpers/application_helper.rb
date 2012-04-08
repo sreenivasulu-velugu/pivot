@@ -7,7 +7,7 @@ module ApplicationHelper
 				) + content_tag(
 					'div', value, :class => 'light_text', :style => "margin-left:#{key_width+10}px;"
 				)
-
+			
 			return content_tag( 
 				'div', contents, :class => 'beautify_params'
 			)
