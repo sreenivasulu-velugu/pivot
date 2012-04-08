@@ -12,6 +12,8 @@ class User
   # last_access_times just here for history, not used
   field :last_access_times, :type => Array, :default => []
 
+  #relations
+ 
 
 
   attr_accessible :provider, :uid, :name, :email, :role, :company_name, :last_access_time, :last_access_times
