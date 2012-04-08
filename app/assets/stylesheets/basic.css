@@ -1,0 +1,82 @@
+/* For image replacement */
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display: none !important; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: h5bp.com/q */ 
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+/* Floats */
+.fr { float: right !important; }
+.fl { float: left !important; }
+
+/* Font effects */
+.fb { font-weight:bold !important; }
+.fn { font-weight:normal !important; }
+
+/** 
+ * Following is taken from OOCSS framework https://github.com/stubbornella/oocss/blob/master/core/spacing/space.css 
+
+ * Spacing classes 
+ * Should be used to modify the default spacing between objects (not between nodes of the same object)
+ * Please use judiciously. You want to be using defaults most of the time, these are exceptions! 
+ * <type><location><size>
+ */
+ /* ====== Default spacing ====== */
+h1, h2, h3, h4, h5, h6, ul, ol,dl, p,blockquote, .media {margin:10px;}
+h1, h2, h3, h4, h5, h6,img{padding-bottom:0px;}
+pre{margin: 10px;}
+table h1,table h2,table h3, table h4, table h5, table h6, table p, table ul, table ol, table dl{padding:0;}
+ 
+/* spacing helpers
+p,m = padding,margin
+a,t,r,b,l,h,v = all,top,right,bottom,left,horizontal,vertical
+s,m,l,n = small(5px),medium(10px),large(20px),none(0px)
+*/
+
+.ptn,.pvn,.pan{padding-top:0px !important}
+.pts,.pvs,.pas{padding-top:5px !important}
+.ptm,.pvm,.pam{padding-top:10px !important}
+.ptl,.pvl,.pal{padding-top:20px !important}
+.prn,.phn,.pan{padding-right:0px !important}
+.prs,.phs,.pas{padding-right:5px !important}
+.prm,.phm,.pam{padding-right:10px !important}
+.prl,.phl,.pal{padding-right:20px !important}
+.pbn,.pvn,.pan{padding-bottom:0px !important}  
+.pbs,.pvs,.pas{padding-bottom:5px !important}
+.pbm,.pvm,.pam{padding-bottom:10px !important}
+.pbl,.pvl,.pal{padding-bottom:20px !important}
+.pln,.phn,.pan{padding-left:0px !important}
+.pls,.phs,.pas{padding-left:5px !important}
+.plm,.phm,.pam{padding-left:10px !important}
+.pll,.phl,.pal{padding-left:20px !important}
+.mtn,.mvn,.man{margin-top:0px !important}
+.mts,.mvs,.mas{margin-top:5px !important}
+.mtm,.mvm,.mam{margin-top:10px !important}
+.mtl,.mvl,.mal{margin-top:20px !important}
+.mtxl,.mvxl,.maxl{margin-top:40px !important}
+.mrn,.mhn,.man{margin-right:0px !important}
+.mrs,.mhs,.mas{margin-right:5px !important}
+.mrm,.mhm,.mam{margin-right:10px !important}
+.mrl,.mhl,.mal{margin-right:20px !important}
+.mbn,.mvn,.man{margin-bottom:0px !important}  
+.mbs,.mvs,.mas{margin-bottom:5px !important}
+.mbm,.mvm,.mam{margin-bottom:10px !important}
+.mbl,.mvl,.mal{margin-bottom:20px !important}
+.mln,.mhn,.man{margin-left:0px !important}
+.mls,.mhs,.mas{margin-left:5px !important}
+.mlm,.mhm,.mam{margin-left:10px !important}
+.mll,.mhl,.mal{margin-left:20px !important}

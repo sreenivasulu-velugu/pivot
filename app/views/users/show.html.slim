@@ -1,24 +1,64 @@
+.content_white
+	.pull-left
+		- if session[:image_url]
+			img src="#{session[:image_url]}" alt="PrifilePic"
+		- else
+			= image_tag('profile_pic.png')
+	
+	.span4.pull-left
+		- if current_user
+			h3= link_to @user.name, edit_user_path
+		- else
+			h3= @user.name
 
-h2 Welcome 
-h3= @user.name
-br
+		= beautify_params 'Email', @user.email, 120
+		= beautify_params 'Role', @user.role, 120
+		= beautify_params 'Company Name', @user.company_name, 120
+	
+	.span2.pull-right
+		= link_to 'Edit your profile', edit_user_path, :class => 'btn btn-primary'
+		p 
+			b 576&nbsp;
+			span.light_text Pivots
+		p 
+			b 576&nbsp;
+			span.light_text Followers
+		p 
+			b 576&nbsp;
+			span.light_text Following
+	.clearfix
 
-.span4
-	br
-	- if session[:image_url]
-		img src="#{session[:image_url]}" alt="PrifilePic"
-	- else
-		= image_tag('profile_pic.png')
+.left_container
+	.menu
+		ul
+			li.first Pivots
+			li Following
+			li Followers
+			li Favorites
+			li.last Likes
+.right_container
+	.content_white
+		div contenteditable="true" style="border: 1px solid #AAA;padding:10px" this can be edited, blah blah
 
-	p Email: 
-	- if @user.email
-		= @user.email
-	br
-	p Role:
-	- if @user.role
-		= @user.role
-	br
-	p Company name:
-	- if @user.company_name
-		= @user.company_name
-.span6		
+		ul
+			li.mts
+				= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
+				div.fl some message goes here.
+				span.fr 8th Apr 12
+				.clearfix
+			li.mts
+				= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
+				div.fl some message goes here.
+				span.fr 8th Apr 12
+				.clearfix
+			li.mts
+				= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
+				div.fl some message goes here.
+				span.fr 8th Apr 12
+				.clearfix
+
+
+
+
+
+

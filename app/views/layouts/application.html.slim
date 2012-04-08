@@ -18,12 +18,12 @@ html
           = render 'layouts/navigation'
     #main role="main"
       .container
+        - flash.each do |name, msg|
+          div class="alert alert-#{name == :notice ? 'success' : 'error'}"
+            a.close href="#" data-dismiss="alert" ×
+            = msg
+      .container
         .content
-          .row
-            .span12
-              - flash.each do |name, msg|
-                div class="alert alert-#{name == :notice ? 'success' : 'error'}"
-                  a.close href="#" data-dismiss="alert" ×
-                  = msg
-              = yield
-          footer
+          = yield
+          .clearfix
+        footer

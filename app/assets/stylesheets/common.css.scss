@@ -1,0 +1,31 @@
+@import 'mixins';
+
+ul {
+	margin: 0 auto;
+	li {
+		list-style: none;
+	}
+}
+
+.content_white {
+	padding: 20px;
+	@include component;
+}
+
+.left_container {
+	float: left;
+	width: 300px;
+}
+.right_container {
+	float: left;
+	width: 640px;
+	@include ml10;
+}
+
+.menu {
+	@include component;
+	ul > li {
+		padding: 5px 10px;
+		// background: #EEE;
+	}
+}
