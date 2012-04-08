@@ -31,11 +31,27 @@
 .left_container
 	.menu
 		ul
-			li.first Pivots
-			li Following
-			li Followers
-			li Favorites
-			li.last Likes
+			li
+				a.list_link.first href="#"
+					| Pivots
+					i.icon_right_arrow.fr
+			li
+				a.list_link.first href="#"
+					| Following
+					i.icon_right_arrow.fr
+			li
+				a.list_link.first href="#"
+					| Followers
+					i.icon_right_arrow.fr
+			li
+				a.list_link.first href="#"
+					| Favorites
+					i.icon_right_arrow.fr
+			li
+				a.list_link.last href="#"
+					| Likes
+					i.icon_right_arrow.fr		
+
 .right_container
 	.content_white
 		= render :partial =>'posts/form'

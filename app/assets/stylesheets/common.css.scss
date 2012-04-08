@@ -1,5 +1,9 @@
 @import 'mixins';
 
+input[type='text'] {
+	height: 27px;
+}
+
 ul {
 	margin: 0 auto;
 	li {
@@ -24,8 +28,26 @@ ul {
 
 .menu {
 	@include component;
-	ul > li {
-		padding: 5px 10px;
-		// background: #EEE;
+}
+
+.list_link {
+	padding: 5px 10px;
+	background: #F9F9F9;
+	border-bottom: 1px solid #EEE;
+	@include tdn;
+	display: block;
+	&:hover {
+		background: #FFF;
+		color: #333;
+		@include tdn;
 	}
 }
+.list_link.first {
+	@include top_rad5;
+}
+.list_link.last {
+	border: none;
+	@include bot_rad5;
+}
+
+
