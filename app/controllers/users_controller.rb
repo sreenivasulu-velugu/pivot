@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pivot = Pivot.new
     @user = User.find(params[:id])
   end
 
