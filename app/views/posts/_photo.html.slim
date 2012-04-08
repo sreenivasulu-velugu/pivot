@@ -1,0 +1,17 @@
+- content_for :head do
+  = include_javascripts :photos
+
+#author_info
+  = person_image_link(post.author)
+  .from
+    h2
+      = post.author.name
+
+#show_photo{:data=> guid=(post.id})
+  = image_tag post.url(:scaled_full)
+
+  #caption
+    = post.text
+
+br
+= link_to t('photos.show.show_original_post'), post_path(post.status_message)

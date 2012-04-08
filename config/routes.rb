@@ -6,4 +6,7 @@ PivotIT::Application.routes.draw do
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/auth/failure' => 'sessions#failure'
   
+
+
+  
 end
