@@ -1,4 +1,5 @@
 // common mixins
+$dirty_white: #F9F9F9;
 @mixin rad1 {
 	-webkit-border-radius: 1px;
 	-moz-border-radius: 1px;
@@ -98,6 +99,15 @@
 @mixin ml20 {
 	margin-left: 20px;
 }
+@mixin p5 {
+	padding: 5px;
+}
+@mixin p10 {
+	padding: 10px;
+}
+@mixin p20 {
+	padding: 20px;
+}
 @mixin pt5 {
 	padding-top: 5px;
 }
@@ -143,15 +153,6 @@
 @mixin light_text {
 	color: #999;
 }
-@mixin glyph_icons {
-	background-image: url("../assets/icons/glyphicons-halflings.png");
-  background-repeat: no-repeat;
-  display: inline-block;
-  height: 14px;
-  line-height: 14px;
-  vertical-align: text-top;
-  width: 14px;
-}
 @mixin component {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -159,16 +160,4 @@
 	background: #FFF;
 	border: 1px solid #DDD;
 	margin-bottom: 10px;
-}
-
-.light_text {
-	@include light_text
-}
-.beautify_params {
-	@include mb5;
-	clear: both;
-}
-.icon_right_arrow {
-	@include glyph_icons;
-	background-position: -456px -72px;
 }

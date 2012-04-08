@@ -1,0 +1,11 @@
+@import 'mixins';
+
+@mixin right_post {
+	min-width: 620px;
+	width: 620px;
+	max-width: 620px;
+}
+
+.right_post {
+	@include right_post;
+}

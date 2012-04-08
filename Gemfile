@@ -10,6 +10,8 @@ gem "omniauth-linkedin"
 gem "bootstrap-sass", ">= 2.0.1"
 gem 'jquery-rails'
 gem 'slim'
+gem 'kaminari'
+gem 'bootstrap_rails_helpers', :git => 'git://github.com/crypsis/bootstrap_rails_helpers.git'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

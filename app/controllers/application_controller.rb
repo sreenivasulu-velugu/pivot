@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
         redirect_to root_url, :alert => 'You need to sign in for access to this page.'
       end
     end
+
+    def current_page
+      params[:page] || 1
+    end
     #def 
 
 

@@ -1,8 +1,9 @@
-li.mts
-	= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
+li.item
+	= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 30}"
 	div.fl
-		= p.title 
+		= link_user p.user, :class => 'fb'
+		= beautify_params 'Title', p.title, 50
 		= p.content
 
-	span.fr= p.created_at
+	span.light_text.fr= time_ago_in_words(p.created_at)
 	.clearfix

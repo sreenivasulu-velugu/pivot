@@ -32,7 +32,7 @@
 	.menu
 		ul
 			li
-				a.list_link.first href="#"
+				a.list_link.first.active href="#"
 					| Pivots
 					i.icon_right_arrow.fr
 			li
@@ -53,8 +53,12 @@
 					i.icon_right_arrow.fr		
 
 .right_container
-	.content_white
-		= render :partial =>'posts/form'
+	= render :partial =>'posts/form'
+	.content_white.pan
 		ul id="pivots"
+			li.item
+				h3 Pivots
 			- @posts.each do |post|
 				= render :partial =>'posts/show', :locals => { :p => post }
+
+			= paginate @posts, :theme => 'more', :params => { :controller => 'users', :action => 'show', :more => true }

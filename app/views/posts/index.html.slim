@@ -1,0 +1,8 @@
+- @posts.each do |p|
+	.content_dirty_white
+		= beautify_params 'Name', p.user.name
+		= beautify_params 'Title', p.title
+		= beautify_params 'Description', p.content
+.content_dirty_white
+	= paginate @posts, :theme => 'more', :params => { :controller => 'posts', :action => 'index', :more => true }
+	.clearfix

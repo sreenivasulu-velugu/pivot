@@ -14,4 +14,14 @@ module ApplicationHelper
 		end
 	end
 
+	def image_radius size = 5
+		return "-webkit-border-radius: #{size}px;	-moz-border-radius: #{size}px; border-radius: #{size}px;"
+	end
+
+	def link_user user = nil, opts = {}
+		if user
+			link_to user.name, user_path(user.id), opts
+		end
+	end
+
 end

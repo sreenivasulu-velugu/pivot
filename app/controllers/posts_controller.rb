@@ -21,6 +21,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def index
+    @posts = Post.all.page(current_page).per(1)
+  end
+
   def show
   end
 

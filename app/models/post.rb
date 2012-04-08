@@ -14,6 +14,6 @@ class Post
   field :reshares_count, :type => Integer
   field :comments_count, :type => Integer
   
-    
+  belongs_to :user    
 
 end

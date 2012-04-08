@@ -1,7 +1,14 @@
-= form_for Post.new ,:remote => true do |f|
-	= f.text_field :title,:placeholder =>'Pivot Title'
-	= f.hidden_field :user_id, :value => current_user.id
-	br
-	= f.text_area :content, :rows =>4 , :placeholder => 'your pivot content..!'
-	br
-	= f.submit "Publish",:class =>'btn btn-primary'
+.content_dirty_white
+	= form_for Post.new ,:remote => true do |f|
+		= f.text_field :title, :placeholder =>'Pivot Title', :class => 'right_post'
+		= f.hidden_field :user_id, :value => current_user.id
+		= f.text_area :content, :rows =>4 , :placeholder => 'your pivot content..!', :class => 'right_post'
+
+		div
+			= link_to raw("<div class='attachment'></div>"), '#', :rel => 'tooltip', 'data-original-title' => 'Attach File', :class => 'fl', :id => 'tooltip_1',:title => 'Test tooltip'
+		= f.submit "Publish",:class =>'btn btn-primary fr'
+
+	.clearfix
+
+javascript:
+	$('.show_tooltip').tooltip('show');

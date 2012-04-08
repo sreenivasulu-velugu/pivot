@@ -1,5 +1,19 @@
 @import 'mixins';
 
+@mixin menu_active {
+	background: #FFF;
+	color: #333;
+	@include tdn;
+}
+
+@mixin item_border {
+	border-bottom: 1px solid #EEE;
+}
+
+form {
+	margin: 0px !important;
+}
+
 input[type='text'] {
 	height: 27px;
 }
@@ -12,8 +26,14 @@ ul {
 }
 
 .content_white {
-	padding: 20px;
+	@include p20;
 	@include component;
+}
+
+.content_dirty_white {
+	@include component;
+	background: $dirty_white;
+	@include p10;
 }
 
 .left_container {
@@ -33,14 +53,15 @@ ul {
 .list_link {
 	padding: 5px 10px;
 	background: #F9F9F9;
-	border-bottom: 1px solid #EEE;
+	@include item_border;
 	@include tdn;
 	display: block;
 	&:hover {
-		background: #FFF;
-		color: #333;
-		@include tdn;
+		@include menu_active
 	}
+}
+.list_link.active {
+	@include menu_active	
 }
 .list_link.first {
 	@include top_rad5;
@@ -49,5 +70,19 @@ ul {
 	border: none;
 	@include bot_rad5;
 }
+.light_text {
+	@include light_text
+}
+.beautify_params {
+	@include mb5;
+	clear: both;
+}
 
+ul > li.item {
+	@include p10;
+	@include item_border;
+}
 
+.fb {
+	@include fb;
+}
