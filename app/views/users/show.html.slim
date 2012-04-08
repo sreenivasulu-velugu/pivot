@@ -54,21 +54,7 @@
 
 .right_container
 	.content_white
-		div contenteditable="true" style="border: 1px solid #AAA;padding:10px" this can be edited, blah blah
-
-		ul
-			li.mts
-				= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
-				div.fl some message goes here.
-				span.fr 8th Apr 12
-				.clearfix
-			li.mts
-				= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
-				div.fl some message goes here.
-				span.fr 8th Apr 12
-				.clearfix
-			li.mts
-				= image_tag 'http://placehold.it/60x60', :class => 'fl mrm'
-				div.fl some message goes here.
-				span.fr 8th Apr 12
-				.clearfix
+		= render :partial =>'posts/form'
+		ul id="pivots"
+			- @posts.each do |post|
+				= render :partial =>'posts/show', :locals => { :p => post }

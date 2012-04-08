@@ -1,0 +1,7 @@
+= form_for Post.new ,:remote => true do |f|
+	= f.text_field :title,:placeholder =>'Pivot Title'
+	= f.hidden_field :user_id, :value => current_user.id
+	br
+	= f.text_area :content, :rows =>4 , :placeholder => 'your pivot content..!'
+	br
+	= f.submit "Publish",:class =>'btn btn-primary'
