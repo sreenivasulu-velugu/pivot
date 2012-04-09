@@ -1,7 +1,7 @@
 .content_white
 	.pull-left
-		- if session[:image_url]
-			img src="#{session[:image_url]}" alt="PrifilePic"
+		- if current_user
+			img src="#{session[:image]}" alt="PrifilePic"
 		- else
 			= image_tag('profile_pic.png')
 	
