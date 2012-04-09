@@ -1,7 +1,7 @@
 .content_white
 	.pull-left
-		- if current_user
-			img src="#{session[:image]}" alt="PrifilePic"
+		- if session[:image_url]
+			img src="#{session[:image_url]}" alt="PrifilePic"
 		- else
 			= image_tag('profile_pic.png')
 	
@@ -29,6 +29,7 @@
 	.clearfix
 
 .left_container
+	= render :partial =>'posts/form'
 	.menu
 		ul
 			li
@@ -53,7 +54,7 @@
 					i.icon_right_arrow.fr		
 
 .right_container
-	= render :partial =>'posts/form'
+	/!= render :partial =>'posts/form'
 	.content_white.pan
 		ul id="pivots"
 			li.item
