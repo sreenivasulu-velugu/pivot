@@ -4,6 +4,21 @@ li.item
 		= link_user p.user, :class => 'fb'
 		= beautify_params 'Title', p.title, 50
 		= p.content
-
+	= link_to 'show', post_path(p.id)
 	span.light_text.fr= time_ago_in_words(p.created_at)
 	.clearfix
+
+- if p.comments.size > 0
+  h4 Comments
+  - for comment in p.comments.order_by([:created_at,:desc])
+  	= comment.content
+  	span.light_text.fr= time_ago_in_words(comment.created_at)
+  	br
+  	hr
+
+h4 New Comment
+= form_for [p, Comment.new] do |f|
+	= f.hidden_field "user_id", :value => p.user.id
+	= f.text_area :content, :rows => 4
+	br
+	= f.submit "Comment", :class =>"btn btn-primary"

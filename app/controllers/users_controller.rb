@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = Post.all.order("created_at desc").page(current_page).per(20)
+    @user_posts = Post.where(user_id: "4f8085cae1382359dd000001")
+    @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
     @user = User.find(params[:id])
   end
 

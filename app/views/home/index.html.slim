@@ -7,7 +7,8 @@
 	.span5
 		blockquote 
 			h2 Make Your Team Smarter, Better, Faster.
-	.span5	
+	.span5
+	- if !user_signed_in?	
 		a href="/signin"
 			= image_tag('linkedin.png')
 	.clearfix

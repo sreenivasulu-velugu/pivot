@@ -13,7 +13,9 @@ class Post
   field :likes_count, :type => Integer
   field :reshares_count, :type => Integer
   field :comments_count, :type => Integer
-  
-  belongs_to :user    
+  validates_presence_of :title
+  embeds_many :comments
+  referenced_in :user
+   
 
 end

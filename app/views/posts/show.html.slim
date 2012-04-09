@@ -1,0 +1,23 @@
+li.item
+	= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 10}"
+	div.fl
+		= link_user @post.user, :class => 'fb'
+		= beautify_params 'Title', @post.title, 50
+		= @post.content
+
+	span.light_text.fr= time_ago_in_words(@post.created_at)
+	.clearfix
+
+	- if @post.comments.size > 0
+	  h4 Comments
+	  - for comment in @post.comments
+	  	= comment.content
+	  	br
+	  	hr
+
+h4 New Comment
+= form_for [@post, Comment.new] do |f|
+	= f.hidden_field "user_id", :value => @post.user.id
+	= f.text_area :content, :rows => 4
+	br
+	= f.submit "Comment", :class =>"btn btn-primary"

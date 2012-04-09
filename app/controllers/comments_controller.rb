@@ -6,8 +6,13 @@ class CommentsController < ApplicationController
              :json
 
   def create
-    
+    #render :text => params.inspect;return
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.create!(params[:comment])
+    redirect_to @post, :notice => "Comment created!"
   end
+
+
 
   def destroy
     @comment = Comment.find(params[:id])

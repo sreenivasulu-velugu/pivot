@@ -16,7 +16,7 @@ class User
   attr_accessible :provider, :uid, :name, :email, :role, :company_name, :last_access_time, :last_access_times
  
   #relations
-  has_many :posts
+  references_many :posts
 
   def self.create_with_omniauth(auth)
     create! do |user|
