@@ -1,8 +1,8 @@
 .content_dirty_white
 	= form_for Post.new ,:remote => true do |f|
-		= f.text_field :title, :placeholder =>'Pivot Title', :class => 'right_post'
+		= f.text_field :title, :maxlength=>"50", :placeholder =>'Pivot Title (50 char max.)', :class => 'right_post'
 		= f.hidden_field :user_id, :value => current_user.id
-		= f.text_area :content, :rows =>4 , :placeholder => 'your pivot content..!', :class => 'right_post'
+		= f.text_area :content, :maxlength=>"1024", :rows =>4 , :placeholder => 'your pivot content..!(1024 char max.)', :class => 'right_post'
 
 		div
 			= link_to raw("<div class='attachment'></div>"), '#', :rel => 'tooltip', 'data-original-title' => 'Attach File', :class => 'fl', :id => 'tooltip_1',:title => 'Test tooltip'

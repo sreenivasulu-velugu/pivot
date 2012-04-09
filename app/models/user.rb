@@ -2,12 +2,13 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :provider, :type => String
-  field :uid, :type => String
-  field :name, :type => String
-  field :email, :type => String
-  field :role, :type => String
-  field :company_name, :type => String
+  field :provider
+  field :uid
+  field :name
+  field :email
+  field :role
+  field :company_name
+  field :image_url
   field :last_access_time, :type => Time
   # last_access_times just here for history, not used
   field :last_access_times, :type => Array, :default => []
@@ -24,6 +25,7 @@ class User
       if auth['info']
          user.name = auth['info']['name'] || ""
          user.email = auth['info']['email'] || ""
+         user.image_url = auth['info']['image'] || ""
       end
     end
   end

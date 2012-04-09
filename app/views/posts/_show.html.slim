@@ -1,5 +1,10 @@
 li.item
-	= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 30}"
+	- if session[:image_url]
+		img src="#{session[:image_url]}" alt="PrifilePic" class='fl mrm' style="#{image_radius 40}"
+	- else
+		= image_tag 'profile_pic.png' , :class => 'fl mrm', :style => "#{image_radius 35}"
+
+	/!= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 30}"
 	div.fl
 		= link_user p.user, :class => 'fb'
 		= beautify_params 'Title', p.title, 50
