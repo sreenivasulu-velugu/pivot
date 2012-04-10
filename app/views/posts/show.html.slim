@@ -1,23 +1,27 @@
-li.item
-	= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 10}"
-	div.fl
-		= link_user @post.user, :class => 'fb'
-		= beautify_params 'Title', @post.title, 50
-		= @post.content
+.content_white
+	ul
+		li.item
+			= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 10}"
+			div.fl
+				= link_user @post.user, :class => 'fb'
+				= beautify_params 'Title', @post.title, 50
+				= @post.content
+			.clearfix
 
-	span.light_text.fr= time_ago_in_words(@post.created_at)
-	.clearfix
-
+	ul class="item_children hide" id="comments_#{@post.id}"
 	- if @post.comments.size > 0
-	  h4 Comments
-	  - for comment in @post.comments
-	  	= comment.content
-	  	br
-	  	hr
+		li 
+			h4.fl Comments
+			/!= link_to 'Hide', '#', :class => 'hide_comments fr mrm', :post_id => "#{@post.id}"
+			.clearfix
 
-h4 New Comment
-= form_for [@post, Comment.new] do |f|
-	= f.hidden_field "user_id", :value => @post.user.id
-	= f.text_area :content, :rows => 4
-	br
-	= f.submit "Comment", :class =>"btn btn-primary"
+			- for comment in @post.comments.order_by([:created_at,:desc])
+				li
+					.pic= user_image comment.user, 40
+					.item_content= comment.content
+					span.light_text.fr= time_ago_in_words(comment.created_at)
+					.clearfix
+		li.left_form id="comments_head"
+		= render :partial =>'comments/comment', :locals =>{ :p => @post}		
+
+	

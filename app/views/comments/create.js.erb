@@ -1,0 +1,1 @@
+$('#comments_head').after("<%= escape_javascript(render :partial =>'posts/#{@post.id}',:locals =>{:p => @post} )%>");

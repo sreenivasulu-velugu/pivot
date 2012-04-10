@@ -9,7 +9,12 @@ class CommentsController < ApplicationController
     #render :text => params.inspect;return
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create!(params[:comment])
-    redirect_to @post, :notice => "Comment created!"
+    respond_to do |format|
+        format.js {}
+        format.json { render :nothing => true, :status => 204 }
+        format.all {redirect_to @post, :notice => "Comment created!"}
+    end
+    
   end
 
 

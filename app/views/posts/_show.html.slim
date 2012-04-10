@@ -12,21 +12,16 @@ li.item
 
 ul class="item_children hide" id="comments_#{p.id}"
 	- if p.comments.size > 0
-		li
+		li 
 			h4.fl Comments
 			= link_to 'Hide', '#', :class => 'hide_comments fr mrm', :post_id => "#{p.id}"
 			.clearfix
+
 			- for comment in p.comments.order_by([:created_at,:desc])
 				li
 					.pic= user_image comment.user, 40
 					.item_content= comment.content
 					span.light_text.fr= time_ago_in_words(comment.created_at)
 					.clearfix
-	li.left_form
-		= form_for [p, Comment.new] do |f|
-			= f.hidden_field "user_id", :value => p.user.id
-			= f.text_area :content, :rows => 2, :placeholder => 'Comment here...'
-			= f.submit "Comment", :class =>"btn btn-primary fr"
-			- if p.comments.size == 0
-				= link_to 'Hide Form', '#', :class => 'hide_comments fr mrm', :post_id => "#{p.id}"
-			.clearfix
+	li.left_form id="comments_head"
+		= render :partial =>'comments/comment', :locals =>{ :p => p}
