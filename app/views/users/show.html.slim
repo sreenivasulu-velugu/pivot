@@ -1,9 +1,6 @@
 .content_white
 	.pull-left
-		- if session[:image_url]
-			img src="#{session[:image_url]}" alt="PrifilePic"
-		- else
-			= image_tag('profile_pic.png')
+		= user_image current_user
 	
 	.span4.pull-left
 		- if current_user
@@ -57,7 +54,7 @@
 	/!= render :partial =>'posts/form'
 	.content_white.pan
 		ul id="pivots"
-			li.item
+			li.item id="pivots_head"
 				h3 Pivots
 			- @posts.each do |post|
 				= render :partial =>'posts/show', :locals => { :p => post }

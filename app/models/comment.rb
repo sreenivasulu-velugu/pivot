@@ -8,7 +8,10 @@ class Comment
   embedded_in :post, :inverse_of => :comments
 
   validates :content, :presence => true, :length => {:maximum => 65535}
-   
+
+  # relations
+  belongs_to :user
+
   before_save do
     self.content.strip! unless self.content.nil?
   end

@@ -1,24 +1,32 @@
 li.item
-	= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 10}"
-	div.fl
+	.pic= user_image p.user, 60
+	.item_content
 		= link_user p.user, :class => 'fb'
 		= beautify_params 'Title', p.title, 50
 		= p.content
-	= link_to 'show', post_path(p.id)
 	span.light_text.fr= time_ago_in_words(p.created_at)
+	= link_to 'Show', post_path(p.id), :class => 'fr mrm'
+	= link_to 'Reply/Comments', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
+
 	.clearfix
 
-- if p.comments.size > 0
-  h4 Comments
-  - for comment in p.comments.order_by([:created_at,:desc])
-  	= comment.content
-  	span.light_text.fr= time_ago_in_words(comment.created_at)
-  	br
-  	hr
-
-h4 New Comment
-= form_for [p, Comment.new] do |f|
-	= f.hidden_field "user_id", :value => p.user.id
-	= f.text_area :content, :rows => 4
-	br
-	= f.submit "Comment", :class =>"btn btn-primary"
+ul class="item_children hide" id="comments_#{p.id}"
+	- if p.comments.size > 0
+		li
+			h4.fl Comments
+			= link_to 'Hide', '#', :class => 'hide_comments fr mrm', :post_id => "#{p.id}"
+			.clearfix
+			- for comment in p.comments.order_by([:created_at,:desc])
+				li
+					.pic= user_image comment.user, 40
+					.item_content= comment.content
+					span.light_text.fr= time_ago_in_words(comment.created_at)
+					.clearfix
+	li.left_form
+		= form_for [p, Comment.new] do |f|
+			= f.hidden_field "user_id", :value => p.user.id
+			= f.text_area :content, :rows => 2, :placeholder => 'Comment here...'
+			= f.submit "Comment", :class =>"btn btn-primary fr"
+			- if p.comments.size == 0
+				= link_to 'Hide Form', '#', :class => 'hide_comments fr mrm', :post_id => "#{p.id}"
+			.clearfix

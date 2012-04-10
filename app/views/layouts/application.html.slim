@@ -19,13 +19,12 @@ html
         .container
           = render 'layouts/navigation'
     #main role="main"
-      .container
+      .page_container
         - flash.each do |name, msg|
           div class="alert alert-#{name == :notice ? 'success' : 'error'}"
             a.close href="#" data-dismiss="alert" ×
             = msg
-      .container
         .content
           = yield
           .clearfix
-        footer
+      footer

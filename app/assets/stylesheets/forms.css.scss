@@ -1,11 +1,27 @@
 @import 'mixins';
 
+@mixin left_post {
+	min-width: 620px;
+	width: 620px;
+	max-width: 620px;
+}
+
 @mixin right_post {
 	min-width: 280px;
 	width: 280px;
 	max-width: 280px;
 }
 
-.right_post {
+.left_form input[type="text"],
+.left_form input[type="password"],
+.left_form select,
+.left_form textarea {
+	@include left_post;
+}
+
+.right_form input[type="text"],
+.right_form input[type="password"],
+.right_form select,
+.right_form textarea {
 	@include right_post;
 }

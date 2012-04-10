@@ -1,1 +1,1 @@
-$('#pivots').prepend("<%= escape_javascript(render :partial =>'posts/show',:locals =>{:p => @post} )%>");
+$('#pivots_head').after("<%= escape_javascript(render :partial =>'posts/show',:locals =>{:p => @post} )%>");

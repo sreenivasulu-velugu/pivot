@@ -15,14 +15,18 @@
 @import 'mixins';
 
 body {
-	background: #c0deed url('../assets/main_bg.jpg') right top fixed;
-	.content {
-		background-color: rgba(255,255,255,.5);
-		padding: 15px;
-		margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-		@include rad6;
-		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-		box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	background: #c0deed url('../assets/main_bg.jpg') right top fixed !important;
+	.page_container {
+		width: 940px;
+		margin: auto;
+		.content {
+			background-color: rgba(255,255,255,.5);
+			padding: 15px;
+			margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+			@include rad6;
+			-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+			-moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+			box-shadow: 0 1px 2px rgba(0,0,0,.15);
+		}
 	}
 }

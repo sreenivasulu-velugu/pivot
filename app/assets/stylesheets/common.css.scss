@@ -9,7 +9,9 @@
 @mixin item_border {
 	border-bottom: 1px solid #EEE;
 }
-
+@mixin item_children_border {
+	border-bottom: 1px solid #E0E0E0;
+}
 form {
 	margin: 0px !important;
 }
@@ -81,6 +83,28 @@ ul {
 ul > li.item {
 	@include p10;
 	@include item_border;
+	.pic {
+		@include mr10;
+		@include fl;
+	}
+	.item_content {
+		width: 545px;
+		@include fl;
+	}
+}
+
+ul.item_children > li {
+	@include p10;
+	@include item_children_border;
+	background: $commets_white;
+	.pic {
+		@include mr10;
+		@include fl;
+	}
+	.item_content {
+		width: 565px;
+		@include fl;
+	}
 }
 
 .fb {

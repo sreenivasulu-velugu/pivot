@@ -1,5 +1,3 @@
-
-
 class PostsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_format_if_malformed_from_status_net, :only => :show
@@ -22,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.page(current_page).per(1)
+    @posts = Post.all.page(current_page).per(10)
   end
 
   def show
