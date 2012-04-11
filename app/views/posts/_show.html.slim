@@ -4,6 +4,13 @@ li.item
 		= link_user p.user, :class => 'fb'
 		= beautify_params 'Title', p.title, 50
 		= p.content
+		br
+		- if p.doc.inspect
+			= link_to 'Document File', open_doc_url(p.doc),:target =>"_blank"
+		br
+		- if p.link_url
+			= link_to 'Shared Link URL', p.link_url,:target =>"_blank"
+		
 	span.light_text.fr= time_ago_in_words(p.created_at)
 	= link_to 'Show', post_path(p.id), :class => 'fr mrm'
 	= link_to 'Reply/Comments', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"

@@ -1,21 +1,22 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
-#   licensed under the Affero General Public License version 3 or later.  See
-#   the COPYRIGHT file.
 
+#require 'carrierwave/orm/mongoid'
 class Post
   include Mongoid::Document
   include Mongoid::Timestamps
   field :title
   field :content
   field :user_id, :type => Integer
-  field :file, :type => Binary
+  mount_uploader :doc , DocUploader
   field :link_url
   field :likes_count, :type => Integer
   field :reshares_count, :type => Integer
   field :comments_count, :type => Integer
+
+
   validates_presence_of :title
   embeds_many :comments
   referenced_in :user
+   
    
 
 end

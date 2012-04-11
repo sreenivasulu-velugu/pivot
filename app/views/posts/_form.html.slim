@@ -1,8 +1,10 @@
 .content_dirty_white.right_form
-	= form_for Post.new ,:remote => true do |f|
+	= form_for Post.new ,:remote => true, :multipart => true do |f|
 		= f.text_field :title, :maxlength=>"50", :placeholder =>'Pivot Title (50 char max.)', :class => 'right_post'
 		= f.hidden_field :user_id, :value => current_user.id
 		= f.text_area :content, :maxlength => "1024", :rows => 4, :placeholder => 'your pivot content..!(1024 char max.)', :class => 'right_post'
+		= f.text_field :link_url, :placeholder =>'Share link URL',:onkeyup=>"url_validate(this.value);"
+		= f.file_field :doc
 
 		div
 			= link_to raw("<div class='attachment'></div>"), '#', :rel => 'tooltip', 'data-original-title' => 'Attach File', :class => 'fl', :id => 'tooltip_1',:title => 'Test tooltip'
@@ -11,4 +13,17 @@
 	.clearfix
 
 javascript:
+
+	function url_validate(userUrl)
+	{
+		var regUrl = /^(((ht|f){1}(tp:[/][/]){1})|((www.){1}))[-a-zA-Z0-9@:%_\+.~#?&//=]+$/;
+		if(regUrl.test(userUrl) == false)
+		{
+			document.getElementById("status").innerHTML = "Website URL is not valid yet.";
+		}
+		else
+		{
+			document.getElementById("status").innerHTML = "You have entered a valid website URL!";
+		}
+	}
 	// $('.show_tooltip').tooltip('show');

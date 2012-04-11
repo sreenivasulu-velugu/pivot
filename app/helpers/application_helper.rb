@@ -31,7 +31,15 @@ module ApplicationHelper
 			else
 				image_tag 'profile_pic.png', :width => width.presence ? "#{width}px" : "76px", :style => "#{ image_radius 10 }"
 			end
-		end
 	end
+end
+
+	def open_doc_url(field)
+		if Rails.env.production?
+			url = "#{request.host}#{field}"
+		else  
+		  url = "http://#{request.host}:#{request.port}#{field}"
+		end
+	end  
 
 end

@@ -1,12 +1,18 @@
 .content_white
 	ul
 		li.item
-			= image_tag 'http://placehold.it/60x60', :class => 'fl mrm', :style => "#{image_radius 10}"
+			.pic= user_image @post.user, 60
 			div.fl
 				= link_user @post.user, :class => 'fb'
 				= beautify_params 'Title', @post.title, 50
 				= @post.content
 			.clearfix
+			br
+			- if @post.doc.inspect
+				= link_to 'Document File', open_doc_url(@post.doc),:target =>"_blank"
+			br
+			- if @post.link_url
+				= link_to 'Shared Link URL', @post.link_url,:target =>"_blank" 
 
 	ul class="item_children hide" id="comments_#{@post.id}"
 	- if @post.comments.size > 0

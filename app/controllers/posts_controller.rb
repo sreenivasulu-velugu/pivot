@@ -9,12 +9,12 @@ class PostsController < ApplicationController
   
   def create
     #render :text => params.inspect;return
-    unless params[:post].blank?
+    unless params[:post].nil?
       @post = Post.create(params[:post])
       respond_to do |format|
         format.js {}
         format.json { render :nothing => true, :status => 204 }
-        format.all {redirect_to user_path}
+        format.all {redirect_to user_path(current_user)}
       end
     end
   end

@@ -12,6 +12,9 @@ gem 'jquery-rails'
 gem 'slim'
 gem 'kaminari'
 gem 'bootstrap_rails_helpers', :git => 'git://github.com/crypsis/bootstrap_rails_helpers.git'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -34,6 +34,5 @@ class ApplicationController < ActionController::Base
       params[:page] || 1
     end
     #def 
-
-
+    
 end
