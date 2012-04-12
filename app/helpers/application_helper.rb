@@ -36,7 +36,7 @@ end
 
 	def open_doc_url(field)
 		if Rails.env.production?
-			url = "#{request.host}#{field}"
+			url = "http://#{request.host}#{field}"
 		else  
 		  url = "http://#{request.host}:#{request.port}#{field}"
 		end
