@@ -6,7 +6,7 @@ li.item
 		= p.content
 		br
 		- if p.doc.inspect
-			= link_to 'Document File', open_doc_url(p.doc),:target =>"_blank"
+			a href="#{open_doc_url(p.doc)}" target="_blank" Document File
 		br
 		- if p.link_url
 			= link_to 'Shared Link URL', p.link_url,:target =>"_blank"
