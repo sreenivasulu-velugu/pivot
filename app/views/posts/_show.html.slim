@@ -12,8 +12,9 @@ li.item
 			= link_to 'Shared Link URL', p.link_url,:target =>"_blank"
 		
 	span.light_text.fr= time_ago_in_words(p.created_at)
-	= link_to 'Show', post_path(p.id), :class => 'fr mrm'
-	= link_to 'Reply/Comments', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
+	.item_links
+		= link_to 'Show', post_path(p.id), :class => 'fr mrm'
+		= link_to 'Reply/Comments', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
 
 	.clearfix
 
@@ -31,4 +32,4 @@ ul class="item_children hide" id="comments_#{p.id}"
 					span.light_text.fr= time_ago_in_words(comment.created_at)
 					.clearfix
 	li.left_form id="comments_head"
-		= render :partial =>'comments/comment', :locals =>{ :p => p}
+		= render :partial => 'comments/comment', :locals => { :p => p }

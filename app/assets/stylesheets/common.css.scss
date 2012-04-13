@@ -28,7 +28,7 @@ ul {
 }
 
 .content_white {
-	@include p20;
+	@include p10;
 	@include component;
 }
 
@@ -81,6 +81,7 @@ ul {
 }
 
 ul > li.item {
+	@include relative;
 	@include p10;
 	@include item_border;
 	.pic {
@@ -90,6 +91,17 @@ ul > li.item {
 	.item_content {
 		width: 545px;
 		@include fl;
+	}
+	.item_links {
+		@include absolute;
+		top: 0px;
+		right: 0px;
+		background: #FFF;
+		padding: 5px;
+		@include dn;
+	}
+	&:hover .item_links {
+		@include db;
 	}
 }
 

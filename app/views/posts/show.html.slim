@@ -1,33 +1,35 @@
-.content_white
-	ul
-		li.item
-			.pic= user_image @post.user, 60
-			div.fl
-				= link_user @post.user, :class => 'fb'
-				= beautify_params 'Title', @post.title, 50
-				= @post.content
-			.clearfix
-			br
-			- if @post.doc.inspect
-				= link_to 'Document File', open_doc_url(@post.doc),:target =>"_blank"
-			br
-			- if @post.link_url
-				= link_to 'Shared Link URL', @post.link_url,:target =>"_blank" 
+/ .content_white
+/ 	ul
+/ 		li.item
+/ 			.pic= user_image @post.user, 60
+/ 			div.fl
+/ 				= link_user @post.user, :class => 'fb'
+/ 				= beautify_params 'Title', @post.title, 50
+/ 				= @post.content
+/ 			.clearfix
+/ 			br
+/ 			- if @post.doc.inspect
+/ 				= link_to 'Document File', open_doc_url(@post.doc),:target =>"_blank"
+/ 			br
+/ 			- if @post.link_url
+/ 				= link_to 'Shared Link URL', @post.link_url,:target =>"_blank" 
 
-	ul class="item_children hide" id="comments_#{@post.id}"
-	- if @post.comments.size > 0
-		li 
-			h4.fl Comments
-			/!= link_to 'Hide', '#', :class => 'hide_comments fr mrm', :post_id => "#{@post.id}"
-			.clearfix
+/ 	ul class="item_children hide" id="comments_#{@post.id}"
+/ 	- if @post.comments.size > 0
+/ 		li 
+/ 			h4.fl Comments
+/ 			/!= link_to 'Hide', '#', :class => 'hide_comments fr mrm', :post_id => "#{@post.id}"
+/ 			.clearfix
 
-			- for comment in @post.comments.order_by([:created_at,:desc])
-				li
-					.pic= user_image comment.user, 40
-					.item_content= comment.content
-					span.light_text.fr= time_ago_in_words(comment.created_at)
-					.clearfix
-		li.left_form id="comments_head"
-		= render :partial =>'comments/comment', :locals =>{ :p => @post}		
+/ 			- for comment in @post.comments.order_by([:created_at,:desc])
+/ 				li
+/ 					.pic= user_image comment.user, 40
+/ 					.item_content= comment.content
+/ 					span.light_text.fr= time_ago_in_words(comment.created_at)
+/ 					.clearfix
+/ 		li.left_form id="comments_head"
+/ 		= render :partial =>'comments/comment', :locals =>{ :p => @post}		
 
-	
+/ 	
+
+= render :partial => 'posts/show', :locals => { :p => @post }
