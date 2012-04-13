@@ -16,11 +16,24 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_posts = Post.where(user_id: "#{current_user.id}")
-    @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
     @user = User.find(params[:id])
+    @user_posts = Post.where(user_id: "#{@user.id}")
+    @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
+    
   end
 
-    
+  def explore
+    @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
+  end
+
+  def follow
+    @user = User.find(params[:id])
+    @followers = @user.followers 
+    @follower << current_user.id
+    @user.update_attributes(:followers => @followers)
+    redirect_to @user
+  end
+
+  
 
 end
