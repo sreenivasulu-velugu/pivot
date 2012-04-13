@@ -16,8 +16,9 @@ html
   body
     header.navbar.navbar-fixed-top
       nav.navbar-inner
-        .container
+        .page_container
           = render 'layouts/navigation'
+          .clearfix
     #main role="main"
       .page_container
         - flash.each do |name, msg|

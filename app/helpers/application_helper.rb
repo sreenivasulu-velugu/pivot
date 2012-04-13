@@ -27,9 +27,9 @@ module ApplicationHelper
 	def user_image user, width = nil
 		if user
 			if user.image_url
-				image_tag user.image_url, :width => width.presence ? "#{width}px" : "76px", :style => "#{ image_radius 10 }"
+				image_tag user.image_url, :width => width.presence ? "#{width}px" : "100px", :style => "#{ image_radius 10 }"
 			else
-				image_tag 'profile_pic.png', :width => width.presence ? "#{width}px" : "76px", :style => "#{ image_radius 10 }"
+				image_tag 'profile_pic.png', :width => width.presence ? "#{width}px" : "100px", :style => "#{ image_radius 10 }"
 			end
 	end
 end

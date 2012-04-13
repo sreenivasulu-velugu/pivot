@@ -61,6 +61,9 @@ $commets_white: #F0F0F0;
 @mixin db {
 	display: block;
 }
+@mixin dn {
+	display: none;
+}
 @mixin no_border {
 	border:none;
 }
@@ -161,4 +164,10 @@ $commets_white: #F0F0F0;
 	background: #FFF;
 	border: 1px solid #DDD;
 	margin-bottom: 10px;
+}
+@mixin relative {
+	position: relative;
+}
+@mixin absolute {
+	position: absolute;
 }

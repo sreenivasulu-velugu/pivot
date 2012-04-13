@@ -12,17 +12,13 @@
 		= beautify_params 'Role', @user.role, 120
 		= beautify_params 'Company Name', @user.company_name, 120
 	
-	.span2.pull-right
+	.prl.pull-right
 		= link_to 'Edit your profile', edit_user_path, :class => 'btn btn-primary'
-		p 
-			b = @user_posts.count 
-			span.light_text &nbsp Pivots
-		p 
-			b 576&nbsp;
-			span.light_text Followers
-		p 
-			b 576&nbsp;
-			span.light_text Following
+		.mts
+			= beautify_params @user_posts.count, 'Pivots', 50
+			= beautify_params '45', 'Followers', 50
+			= beautify_params '23', 'Following', 50
+		
 	.clearfix
 
 .left_container
