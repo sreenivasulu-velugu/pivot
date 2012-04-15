@@ -20,10 +20,11 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem "slim-rails", ">= 0.3.4"
 end
 
 group :development do
-  gem "slim-rails", ">= 0.3.4"
+  
   gem "rspec-rails", ">= 2.9.0.rc2"
   gem "factory_girl_rails", ">= 3.0.0"
   gem "guard", ">= 0.6.2"

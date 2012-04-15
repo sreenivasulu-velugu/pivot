@@ -5,16 +5,30 @@ li.item
 		= beautify_params 'Title', p.title, 50
 		= p.content
 		br
-		- if p.doc.inspect
-			a href="#{open_doc_url(p.doc)}" target="_blank" Document File
-		br
-		- if p.link_url
-			= link_to 'Shared Link URL', p.link_url,:target =>"_blank"
+		- if p.doc.inspect or !p.link_url.blank?
+			span.light_text.fr= time_ago_in_words(p.created_at)
+		- if p.doc.inspect and p.doc.inspect.match(/pdf/)
+			= link_to image_tag('pdf.png') +"Pdf file", open_doc_url(p.doc), :target =>"_blank", :class =>'btn'
+		- elsif p.doc.inspect and p.doc.inspect.match(/png/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc), :target =>"_blank", :class =>'btn '
+		- elsif p.doc.inspect and p.doc.inspect.match(/jpg/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc), :target =>"_blank", :class =>'btn '
+		- elsif p.doc.inspect and p.doc.inspect.match(/jpeg/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc), :target =>"_blank", :class =>'btn '
+		- elsif p.doc.inspect and p.doc.inspect.match(/gif/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc), :target =>"_blank", :class =>'btn '
+		- elsif p.doc.inspect and p.doc.inspect.match(/doc/)
+			= link_to image_tag('doc.png') +"Doc file", open_doc_url(p.doc), :target =>"_blank", :class =>'btn '
 		
-	span.light_text.fr= time_ago_in_words(p.created_at)
+		- if !p.link_url.blank?
+			= link_to image_tag('link.png') +'Shared URL', p.link_url,:target =>"_blank", :class =>'btn'
+	
 	.item_links
-		= link_to 'Show', post_path(p.id), :class => 'fr mrm'
-		= link_to 'Reply', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
+		= link_to image_tag('open_post.png') +"Open", post_path(p.id), :class => 'fr mrm'
+		= link_to image_tag('like.png') +"Like", post_path(p.id), :class => 'fr mrm'
+		- if current_user == p.user
+			= link_to image_tag('delete.png') +"Delete", post_path(p.id), :class => 'fr mrm'
+		= link_to image_tag('add_comment.png') +"Comments", '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
 
 	.clearfix
 
