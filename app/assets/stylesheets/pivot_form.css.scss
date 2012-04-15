@@ -1,0 +1,15 @@
+@import 'mixins';
+
+#post_hidden_form {
+		@include dn;
+}
+.upload_container {
+	@include relative;
+}
+#post_doc {
+	@include absolute;
+	right: 0px;
+	top: 0px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}

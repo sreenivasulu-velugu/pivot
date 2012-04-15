@@ -14,7 +14,7 @@ li.item
 	span.light_text.fr= time_ago_in_words(p.created_at)
 	.item_links
 		= link_to 'Show', post_path(p.id), :class => 'fr mrm'
-		= link_to 'Reply/Comments', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
+		= link_to 'Reply', '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
 
 	.clearfix
 

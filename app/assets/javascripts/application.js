@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-tooltip
-//= require view_comments
 //= require_tree .
