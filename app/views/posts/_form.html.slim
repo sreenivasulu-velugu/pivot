@@ -1,14 +1,14 @@
 .content_dirty_white.right_form
 	= form_for Post.new ,:remote => true, :multipart => true do |f|
-		= f.text_field :title, :maxlength=>"50", :placeholder =>'Pivot Title (50 char max.)', :class => 'right_post'
+		= f.text_field :title, :maxlength=>"50", :placeholder =>'Pivot here', :class => 'no_margin_strict right_post'
 		= f.hidden_field :user_id, :value => current_user.id
-		= f.text_area :content, :maxlength => "1024", :rows => 4, :placeholder => 'your pivot content..!(1024 char max.)', :class => 'right_post'
-		= f.text_field :link_url, :placeholder =>'Share link URL',:onkeyup=>"url_validate(this.value);"
-		= f.file_field :doc
-
-		div
-			= link_to raw("<div class='attachment'></div>"), '#', :rel => 'tooltip', 'data-original-title' => 'Attach File', :class => 'fl', :id => 'tooltip_1',:title => 'Test tooltip'
-		= f.submit "Create Pivot",:class =>'btn btn-primary fr'
+		#post_hidden_form
+			= f.text_area :content, :maxlength => "1024", :rows => 4, :placeholder => 'Pivot content (1024 char max)', :class => 'right_post'
+			= f.text_field :link_url, :placeholder =>'Share link URL',:onkeyup=>"url_validate(this.value);"
+			.btn.btn-success.upload_container
+				| upload file 
+				= f.file_field :doc
+			= f.submit "Create Pivot",:class =>'btn btn-primary fr'
 
 	.clearfix
 

@@ -171,3 +171,6 @@ $commets_white: #F0F0F0;
 @mixin absolute {
 	position: absolute;
 }
+.no_margin_strict {
+	margin: 0px !important;
+}
