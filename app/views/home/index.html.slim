@@ -1,14 +1,17 @@
 .content_white
-	h2 PivotIT
-	br
+	h2 Welcome to PivotIT.
 	hr
-	/!- @users.each do |user|
-	  User= link_to user.name, user
+	br
 	.span5
-		blockquote 
-			h2 Make Your Team Smarter, Better, Faster.
-	.span5
-	- if !user_signed_in?	
-		a href="/signin"
-			= image_tag('linkedin.png')
+		h4 Find out what’s happening, right now, with the people and organizations you care about.
+	- if !user_signed_in?		
+		.span4.btn
+				a href="/signin"
+					= image_tag('linkedin.png')
 	.clearfix
+		
+		
+		
+	
+
+
