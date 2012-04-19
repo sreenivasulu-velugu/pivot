@@ -1,0 +1,31 @@
+/!= current_user.following.inspect
+- unless @user.following_list.blank?
+	- @user.following_list.each do |f|
+		- user = User.find(f)
+		.content_white
+			.pull-left
+				= user_image user, 60
+			
+			.span4.pull-left
+				- if user == current_user
+					h3= link_to user.name, edit_user_path
+				- else
+					h3= link_to user.name, user
+
+				= beautify_params 'Email', user.email, 120
+				= beautify_params 'Role', user.role, 120
+				= beautify_params 'Company Name', user.company_name, 120
+			
+			.span2.pull-right
+
+				- if user == current_user
+						= link_to 'Edit your profile', edit_user_path, :class => 'btn btn-primary'
+				- elsif current_user.following_list.include?(user.id)
+					= link_to "Unfollow #{user.first_name}",unfollow_user_path(user.id), :class => 'btn'
+				- else
+					= link_to "Follow #{user.first_name}",follow_pivoters_user_path(user.id), :class => 'btn btn-primary'
+				
+				
+			.clearfix
+- else
+	p Not following any one!			

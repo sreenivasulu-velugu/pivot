@@ -11,8 +11,8 @@ class SessionsController < ApplicationController
     user = User.where(:provider => auth['provider'], 
                       :uid => auth['uid']).first || User.create_with_omniauth(auth)
     session[:user_id] = user.id
-    session[:image_url] = auth['info']['image']
-    user.update_attributes(:image_url => session[:image_url])
+    
+    user.update_attributes(:image_url => auth['info']['image'],:first_name => auth['info']['first_name'])
     if user.email == "" or user.email == nil
       redirect_to edit_user_path(user), :alert => "Please enter your email address."
     else

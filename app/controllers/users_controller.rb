@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :correct_user?
+  #before_filter :correct_user?
 
   def edit
     @user = User.find(params[:id])
@@ -17,23 +17,71 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_posts = Post.where(user_id: "#{@user.id}")
-    @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
-    
+    if current_user == @user
+      @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
+    else
+      @posts = Post.where(user_id: @user.id).order_by([:created_at, :desc]).page(current_page).per(20)
+    end
   end
 
   def explore
     @posts = Post.all.order_by([:created_at, :desc]).page(current_page).per(20)
   end
 
-  def follow
+  def follow_pivoters
     @user = User.find(params[:id])
-    @followers = @user.followers 
-    @follower << current_user.id
-    @user.update_attributes(:followers => @followers)
-    redirect_to @user
+    following_list = current_user.following_list || []
+    follower_list = @user.follower_list || []
+    
+    if !following_list.include?(@user.id)
+      following_list << @user.id
+      user = User.find(current_user.id)
+      user.update_attributes(:following_list =>following_list)
+      follower_list << user.id
+      @user.update_attributes(:follower_list => follower_list)
+    end
+    flash[:notice] = "Followed Successfully."
+    redirect_to "/users/#{current_user.id}/?following=true"
   end
 
+  def unfollow
+    @user = User.find(params[:id])
+    
+    if current_user.following_list.include?(@user.id)
+      following_list = current_user.following_list
+      following_list.delete(@user.id)
+      user = User.find(current_user.id)
+      user.update_attributes(:following_list => following_list)
+    end
+    flash[:notice] = "Unfollowed Successfully."
+    redirect_to "/users/#{current_user.id}/?following=true"
+  end
+
+  def like_post
+    @post = Post.find(params[:id])
+    like_list = current_user.likes || []
+    if !like_list.include?(@post.id)
+      like_list << @post.id
+      user = User.find(current_user.id)
+      user.update_attributes(:likes =>like_list)
+    end
+    flash[:notice] = "Liked Successfully."
+    redirect_to "/users/#{current_user.id}"
+  end
+
+  def unlike_post
+    @post = Post.find(params[:id])
+    
+    if current_user.likes.include?(@post.id)
+      like_list = current_user.likes
+      like_list.delete(@post.id)
+      user = User.find(current_user.id)
+      user.update_attributes(:likes => like_list)
+    end
+    flash[:notice] = "Unliked Successfully."
+    redirect_to "/users/#{current_user.id}"
+
+  end
   
 
 end

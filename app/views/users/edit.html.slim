@@ -3,8 +3,8 @@
 		h2 Welcome 
 		h3= @user.name
 		br
-		- if session[:image_url]
-			img src="#{session[:image_url]}" alt="PrifilePic"
+		- if @user.image_url
+			= user_image @user
 		- else
 			= image_tag('profile_pic.png')
 

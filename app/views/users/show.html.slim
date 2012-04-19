@@ -1,9 +1,9 @@
 .content_white
 	.pull-left
-		= user_image current_user
+		= user_image @user
 	
 	.span4.pull-left
-		- if current_user
+		- if @user == current_user
 			h3= link_to @user.name, edit_user_path
 		- else
 			h3= @user.name
@@ -13,52 +13,75 @@
 		= beautify_params 'Company Name', @user.company_name, 120
 	
 	.span2.pull-right
+
 		- if @user.id == current_user.id
 				= link_to 'Edit your profile', edit_user_path, :class => 'btn btn-primary'
+		- elsif current_user.following_list.include?(@user.id)
+				= link_to "Unfollow #{@user.first_name}",unfollow_user_path(@user.id), :class => 'btn'
 		- else
-				= link_to '', edit_user_path, :class => 'btn btn-primary'
+				= link_to "Follow #{@user.first_name}",follow_pivoters_user_path, :class => 'btn btn-primary'
 		p 
-			b = @user_posts.count 
+			- if current_user == @user
+				b= current_user.posts.count 
+			- else
+				b= @posts.count 
 			span.light_text &nbsp Pivots
-		p 
-			b 576&nbsp;
-			span.light_text Followers
-		p 
-			b 576&nbsp;
-			span.light_text Following
+			br
+			- if current_user == @user
+				b= current_user.follower_list.size if !current_user.follower_list.nil?
+			- else
+				b= @user.follower_list.size if !@user.follower_list.nil?
+	
+			span.light_text &nbsp Followers
+			br
+			- if current_user == @user
+				b= current_user.following_list.size  if !current_user.following_list.nil?
+			- else
+				b= @user.following_list.size if !@user.following_list.nil?
+			span.light_text &nbsp Following
 	.clearfix
 .left_container
 	= render :partial =>'posts/form'
 	.menu
 		ul
 			li
-				a.list_link.first.active href="#"
+				a.list_link.first.active href="/users/#{@user.id}"
 					| Pivots
 					i.icon_right_arrow.fr
 			li
-				a.list_link.first href="#"
+				a.list_link.first href="/users/#{@user.id}?following=true"
 					| Following
 					i.icon_right_arrow.fr
 			li
-				a.list_link.first href="#"
+				a.list_link.first href="/users/#{@user.id}?follower=true"
 					| Followers
 					i.icon_right_arrow.fr
 			li
-				a.list_link.first href="#"
-					| Favorites
-					i.icon_right_arrow.fr
-			li
-				a.list_link.last href="#"
+				a.list_link.last href="/users/#{@user.id}?like=true"
 					| Likes
 					i.icon_right_arrow.fr		
 
 .right_container
-	/!= render :partial =>'posts/form'
+	
 	.content_white.pan
 		ul id="pivots"
 			li.item id="pivots_head"
-				h3 Pivots
-			- @posts.each do |post|
-				= render :partial =>'posts/show', :locals => { :p => post }
-
-			= paginate @posts, :theme => 'more', :params => { :controller => 'users', :action => 'show', :more => true }
+				- if params[:following]
+						h3 Following
+						= render :partial =>'users/following', :locals => { :@user => @user }
+				- elsif params[:follower]
+						h3 Follower
+						= render :partial =>'users/follower', :locals => { :@user => @user }
+				- elsif params[:like]
+						h3 Likes
+						- if @user.likes.blank?
+							Not likes yet!
+						- else
+							- @user.likes.each do |p|
+								- post = Post.find(p)
+								= render :partial =>'users/likes', :locals => {:p => post}
+				- else
+						h3 Pivots
+						- @posts.each do |post|
+							= render :partial =>'posts/show', :locals => { :p => post }
+						= paginate @posts, :theme => 'more', :params => { :controller => 'users', :action => 'show', :more => true }
