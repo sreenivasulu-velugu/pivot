@@ -64,6 +64,8 @@ class UsersController < ApplicationController
       like_list << @post.id
       user = User.find(current_user.id)
       user.update_attributes(:likes =>like_list)
+      like_count = @post.like_count + 1
+      @post.update_attributes(:like_count => like_count)
     end
     flash[:notice] = "Liked Successfully."
     redirect_to "/users/#{current_user.id}"
@@ -77,11 +79,38 @@ class UsersController < ApplicationController
       like_list.delete(@post.id)
       user = User.find(current_user.id)
       user.update_attributes(:likes => like_list)
+      like_count = @post.like_count - 1
+      @post.update_attributes(:like_count => like_count)
     end
     flash[:notice] = "Unliked Successfully."
     redirect_to "/users/#{current_user.id}"
-
   end
+
+  def follow_pivot
+    @post = Post.find(params[:id])
+    following_pivots = current_user.following_pivots || []
+    if !following_pivots.include?(@post.id)
+      following_pivots << @post.id
+      user = User.find(current_user.id)
+      user.update_attributes(:following_pivots =>following_pivots)
+    end
+    flash[:notice] = "Followed Successfully."
+    redirect_to "/users/#{current_user.id}/?followed=true"
+  end
+
+  def unfollow_pivot
+    @post = Post.find(params[:id])
+    
+    if current_user.following_pivots.include?(@post.id)
+      following_pivots = current_user.following_pivots
+      following_pivots.delete(@post.id)
+      user = User.find(current_user.id)
+      user.update_attributes(:following_pivots => following_pivots)
+    end
+    flash[:notice] = "Unliked Successfully."
+    redirect_to "/users/#{current_user.id}/?followed=true"
+  end
+
   
 
 end

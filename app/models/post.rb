@@ -11,6 +11,7 @@ class Post
   field :likes_count, :type => Integer
   field :reshares_count, :type => Integer
   field :comments_count, :type => Integer
+  
 
 
   validates_presence_of :title

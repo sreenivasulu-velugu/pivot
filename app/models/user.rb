@@ -13,13 +13,14 @@ class User
   field :following_list, :type => Array, :default => []
   field :follower_list, :type => Array, :default => []
   field :likes, :type => Array, :default => []
+  field :following_pivots, :type => Array, :default =>[]
   field :last_access_time, :type => Time
   # last_access_times just here for history, not used
   field :last_access_times, :type => Array, :default => []
 
   attr_accessible :provider, :uid, :name, :email, :role,:follower_list,:following_list,
                   :company_name, :image_url, :last_access_time, :last_access_times,
-                  :first_name, :likes
+                  :first_name, :likes, :following_pivots
  
   #relations
   references_many :posts

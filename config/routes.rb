@@ -8,6 +8,8 @@ PivotIT::Application.routes.draw do
     	get :unfollow
       get :like_post
       get :unlike_post
+      get :follow_pivot
+      get :unfollow_pivot
 
     end
   end

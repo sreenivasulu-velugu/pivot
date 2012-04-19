@@ -4,7 +4,7 @@
 	
 	.span4.pull-left
 		- if @user == current_user
-			h3= link_to @user.name, edit_user_path
+			h3= link_to @user.name, @user
 		- else
 			h3= @user.name
 
@@ -57,9 +57,13 @@
 					| Followers
 					i.icon_right_arrow.fr
 			li
-				a.list_link.last href="/users/#{@user.id}?like=true"
+				a.list_link.first href="/users/#{@user.id}?like=true"
 					| Likes
-					i.icon_right_arrow.fr		
+					i.icon_right_arrow.fr	
+			li
+				a.list_link.last href="/users/#{@user.id}?followed=true"
+					| Following Pivots
+					i.icon_right_arrow.fr
 
 .right_container
 	
@@ -72,10 +76,18 @@
 				- elsif params[:follower]
 						h3 Follower
 						= render :partial =>'users/follower', :locals => { :@user => @user }
+				- elsif params[:followed]
+						h3 Following Pivots
+						- if @user.following_pivots.blank?
+							p Not Followed yet!
+						- else
+							- @user.following_pivots.each do |p|
+								- post = Post.find(p)
+								= render :partial =>'users/followed_pivots', :locals => {:p => post}
 				- elsif params[:like]
 						h3 Likes
 						- if @user.likes.blank?
-							Not likes yet!
+							p No likes yet!
 						- else
 							- @user.likes.each do |p|
 								- post = Post.find(p)
