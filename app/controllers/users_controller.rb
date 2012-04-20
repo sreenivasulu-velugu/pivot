@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     if current_user.following_list.include?(@user.id)
       following_list = current_user.following_list
       follower_list = @user.follower_list
-      followng_list.delete(@user.id)
+      following_list.delete(@user.id)
       follower_list.delete(current_user.id)
       user = User.find(current_user.id)
       user.update_attributes(:following_list => following_list)
