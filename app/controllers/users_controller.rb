@@ -46,12 +46,14 @@ class UsersController < ApplicationController
 
   def unfollow
     @user = User.find(params[:id])
-    
     if current_user.following_list.include?(@user.id)
       following_list = current_user.following_list
-      following_list.delete(@user.id)
+      follower_list = @user.follower_list
+      followng_list.delete(@user.id)
+      follower_list.delete(current_user.id)
       user = User.find(current_user.id)
       user.update_attributes(:following_list => following_list)
+      @user.update_attributes(:follower_list => follower_list)
     end
     flash[:notice] = "Unfollowed Successfully."
     redirect_to "/users/#{current_user.id}/?following=true"
