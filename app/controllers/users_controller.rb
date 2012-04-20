@@ -66,8 +66,8 @@ class UsersController < ApplicationController
       like_list << @post.id
       user = User.find(current_user.id)
       user.update_attributes(:likes =>like_list)
-      like_count = @post.like_count + 1
-      @post.update_attributes(:like_count => like_count)
+      likes_count = @post.likes_count.to_i + 1
+      @post.update_attributes(:likes_count => likes_count)
     end
     flash[:notice] = "Liked Successfully."
     redirect_to "/users/#{current_user.id}"
@@ -81,8 +81,8 @@ class UsersController < ApplicationController
       like_list.delete(@post.id)
       user = User.find(current_user.id)
       user.update_attributes(:likes => like_list)
-      like_count = @post.like_count - 1
-      @post.update_attributes(:like_count => like_count)
+      likes_count = @post.likes_count - 1
+      @post.update_attributes(:likes_count => likes_count)
     end
     flash[:notice] = "Unliked Successfully."
     redirect_to "/users/#{current_user.id}"
