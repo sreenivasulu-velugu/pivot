@@ -2,7 +2,7 @@
 class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :content
+  field :content, :type =>String
   field :user_id, :type => Integer
   field :likes_count, :type => Integer
   embedded_in :post, :inverse_of => :comments

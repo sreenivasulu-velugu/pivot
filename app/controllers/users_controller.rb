@@ -48,12 +48,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if current_user.following_list.include?(@user.id)
       following_list = current_user.following_list
-      follower_list = @user.follower_list
+      followers_list = @user.follower_list
       following_list.delete(@user.id)
-      follower_list.delete(current_user.id)
+      followers_list.delete(current_user.id)
       user = User.find(current_user.id)
       user.update_attributes(:following_list => following_list)
-      @user.update_attributes(:follower_list => follower_list)
+      @user.update_attributes(:follower_list => followers_list)
     end
     flash[:notice] = "Unfollowed Successfully."
     redirect_to "/users/#{current_user.id}/?following=true"
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
       like_list.delete(@post.id)
       user = User.find(current_user.id)
       user.update_attributes(:likes => like_list)
-      likes_count = @post.likes_count - 1
+      likes_count = @post.likes_count.to_i - 1
       @post.update_attributes(:likes_count => likes_count)
     end
     flash[:notice] = "Unliked Successfully."

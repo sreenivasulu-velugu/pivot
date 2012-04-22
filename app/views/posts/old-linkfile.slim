@@ -1,0 +1,17 @@
+old linkes
+
+/!	br
+		- if p.doc_file.inspect or !p.link_url.blank?
+			span.light_text.fr= time_ago_in_words(p.created_at)
+		- if p.doc_file.inspect and p.doc_file.inspect.match(/pdf/)
+			= link_to image_tag('pdf.png') +"Pdf file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn'
+		- elsif p.doc_file.inspect and p.doc_file.inspect.match(/png/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '
+		- elsif p.doc_file.inspect and p.doc_file.inspect.match(/jpg/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '
+		- elsif p.doc_file.inspect and p.doc_file.inspect.match(/jpeg/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '
+		- elsif p.doc_file.inspect and p.doc_file.inspect.match(/gif/)
+			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '
+		- elsif p.doc_file.inspect and p.doc_file.inspect.match(/doc/)
+			= link_to image_tag('doc.png') +"Doc file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '

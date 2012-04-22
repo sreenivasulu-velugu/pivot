@@ -8,9 +8,9 @@
 			
 			.span4.pull-left
 				- if user == current_user
-					h3= link_to user.name, edit_user_path
+					= link_to user.name, edit_user_path, :class => 'fb'
 				- else
-					h3= link_to user.name, user
+					= link_to user.name, user, :class => 'fb'
 
 				= beautify_params 'Email', user.email, 120
 				= beautify_params 'Role', user.role, 120
