@@ -1,0 +1,11 @@
+h4.fl Upload FAQ File
+br
+= f.file_field :faq
+br
+= text_field "faq_file_name", "", :placeholder =>'Enter Faq File Name'
+br
+= f.select :faq_relevance, [["High","High"],["Medium","Medium"],["Low","Low"]],{:prompt => 'Select Relevance'}
+br
+= f.select :faq_privacy, [["Public","Public"],["Confidential","Confidential"],["Private & Confidential ","Private_and_Confidential "]],{:prompt => 'Select Privacy'}
+br
+= f.submit "Upload", :class =>"btn btn-primary"

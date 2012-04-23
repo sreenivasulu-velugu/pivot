@@ -15,3 +15,25 @@ old linkes
 			= link_to image_tag('pic.png') +"Image file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '
 		- elsif p.doc_file.inspect and p.doc_file.inspect.match(/doc/)
 			= link_to image_tag('doc.png') +"Doc file", open_doc_url(p.doc_file), :target =>"_blank", :class =>'btn '
+
+
+
+			/!	ul.nav.nav-tabs
+				li 
+					a href="#doc" data-toggle="tab" DOC
+
+					= f.file_field :doc_file
+					= text_field "file_name","upload",:placeholder =>'Enter File Name'
+					= f.select :doc_relevance, [["High","High"],["Medium","Medium"],["Low","Low"]],{:prompt => 'Select Relevance'}
+					= f.select :doc_privacy, [["Public","Public"],["Confidential","Confidential"],["Private & Confidential ","Private_and_Confidential "]],{:prompt => 'Select Privacy'}
+				li 
+					a href="#faq" data-toggle="tab" FAQ
+					= f.file_field :faq
+					= text_field "faq_file_name", "", :placeholder =>'Enter Faq File Name'
+					= f.select :faq_relevance, [["High","High"],["Medium","Medium"],["Low","Low"]],{:prompt => 'Select Relevance'}
+					= f.select :faq_privacy, [["Public","Public"],["Confidential","Confidential"],["Private & Confidential ","Private_and_Confidential "]],{:prompt => 'Select Privacy'}
+				li 
+					a href="#link_url" data-toggle="tab" LinkURL
+					= f.text_field :link_url, :placeholder =>'Share link URL',:onkeyup=>"url_validate(this.value);"
+					= f.select :link_url_relevance, [["High","High"],["Medium","Medium"],["Low","Low"]],{:prompt => 'Select Relevance'}
+					= f.select :link_url_privacy, [["Public","Public"],["Confidential","Confidential"],["Private & Confidential ","Private_and_Confidential "]],{:prompt => 'Select Privacy'}

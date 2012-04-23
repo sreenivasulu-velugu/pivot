@@ -1,0 +1,28 @@
+- if p.file_comments.size == 0
+	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_file_comments fr mrm', :post_id => "#{p.id}"
+
+br
+= form_for [p, FileComment.new], :multipart => true do |f|
+	= f.hidden_field "user_id", :value => p.user.id
+	= link_to "Attach Link URL", '#', :class => "upload_link_url_comments fr mrm", :post_id => "#{p.id}"
+	= link_to "Upload FAQ", '#', :class => "upload_faq_comments fr mrm", :post_id => "#{p.id}"
+	= link_to "Upload Files", '#', :class => "upload_file_comments fr mrm", :post_id => "#{p.id}"
+	
+	ul class="item_children hide" id="link_url_file_#{p.id}"
+		li 
+			= render :partial => 'file_comments/link_url_comment', :locals => { :f => f }
+			.clearfix		
+
+	ul class="item_children hide" id="upload_faq_#{p.id}"
+		li 
+			= render :partial => 'file_comments/faq_comment', :locals => { :f => f }
+			.clearfix
+
+	ul class="item_children hide" id="upload_file_#{p.id}"
+		li 
+			= render :partial => 'file_comments/file_comment', :locals => { :f => f }
+			.clearfix
+	
+	
+
+	

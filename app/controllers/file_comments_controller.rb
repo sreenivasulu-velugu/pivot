@@ -1,5 +1,5 @@
-class CommentsController < ApplicationController
-  before_filter :authenticate_user!
+class FileCommentsController < ApplicationController
+before_filter :authenticate_user!
 
   respond_to :html,
              :json
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
 
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = FileComment.find(params[:id])
     if current_user.owns?(@comment) || current_user.owns?(@comment.parent)
       current_user.retract(@comment)
       respond_to do |format|
@@ -49,4 +49,5 @@ class CommentsController < ApplicationController
       @post = Post.find_by_id_and_public(params[:post_id], true)
     end
   end
+
 end

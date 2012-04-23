@@ -19,6 +19,7 @@ PivotIT::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   resources :posts do
   	resources :comments
+    resources :file_comments
   end	
   
 
