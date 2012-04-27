@@ -1,38 +1,75 @@
 - if p.file_comments.size == 0
 	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_file_comments fr mrm', :post_id => "#{p.id}"
+- if p.file_comments.size > 0
+	h4.fl Uploaded Files
+	br
+ul
+	- for comment in p.file_comments.order_by([:created_at,:desc])
+		li
+			.pic= user_image comment.user, 40
+			.item_content= link_user comment.user, :class => 'fb'
+			- if comment.file_type
+				p has uploaded "#{comment.file_type}"
+			- if comment.link_url != ""
+				= comment.link_url
+			- else
+				- if comment.file_name != ""
+					= link_to comment.file_name, open_doc_url(comment.doc_file), :target =>"_blank"
 
+			span.light_text.fr= time_ago_in_words(comment.created_at)
+			br
+			b Relevance "#{comment.relevance}"
+			br
+			b Privacy "#{comment.privacy}"
+			hr
+			.clearfix
 
 br
+h4.fl Upload
+hr
 = form_for [p, FileComment.new], :multipart => true do |f|
 	= f.hidden_field "user_id", :value => p.user.id
+	div.mtm
+		.fl.mrl
+			label class="toggle_type cp fl mll" for="show_file_#{p.id}" id="#{p.id}"
+				input type="radio" name="file_type" id="show_file_#{p.id}" class="fl" value="file" checked="checked"
+				| File
+			.clearfix
+		.fl.mrl
+			label class="toggle_type cp fl mll" for="show_faq_#{p.id}" id="#{p.id}"
+				input type="radio" name="file_type" id="show_faq_#{p.id}" class="fl" value="faq"
+				| FAQ
+			.clearfix 
+		.fl.mrl
+			label class="toggle_type cp fl mll" for="show_link_#{p.id}" id="#{p.id}"
+				input type="radio" name="file_type" id="show_link_#{p.id}" class="fl" value="link"
+				| Link
+			.clearfix
+		.clearfix
 
-	label class="cp fl mrm" onclick="if(document.getElementById('showFile').checked){document.getElementById('dateTable').style.display='none';ajaxpage('search/farmers/view_all_q.php?farmerId=<?php echo $farmerId; ?>','getResults');}"
-	input type="radio" name="file_type" id="showFile" File 
+	div id="file_upload_#{p.id}"
+		= text_field "file_name","upload",:placeholder =>'Enter File Name', :class => 'fl'
+		.btn.btn-success.upload_container.fl.mlm
+			| Select File
+			= f.file_field :doc_file
+		.clearfix
 
-	label class="cp fl mrm" onclick="if(document.getElementById('showFile').checked){document.getElementById('dateTable').style.display='block';document.getElementById('getResults').innerHTML='';}"
-	input type="radio" name="file_type" id="showFile" FAQ
-
-	label class="cp fl mrm" onclick="if(document.getElementById('showLink').checked){document.getElementById('dateTable').style.display='block';document.getElementById('getResults').innerHTML='';}"
-	input type="radio" name="file_type" id="showLink" Link
-
-	
-	br
-	= text_field "file_name","upload",:placeholder =>'Enter File Name'
-	.btn.btn-success.upload_container
-		|	upload file
-  		= f.file_field :doc_file
-	br
-	b Relevance
-	input type="radio" name="relevance" High
-	input type="radio" name="relevance" Medium
-	input type="radio" name="relevance" Low
-	br
-	b Privacy
-	input type="radio" name="privacy" Public
-	input type="radio" name="privacy" Confidential
-	input type="radio" name="privacy" Private And Confidential
-	br
-	= f.submit "Upload", :class=>"btn btn-success"
+	div id="link_upload_#{p.id}" style="display:none;"
+		= text_field "link_url", 'url', :placeholder => 'Enter your link'
+	p.mts
+		b.mrl.w100.db.fl Relevance
+		input type="radio" name="relevance" class="mll" value="high" High
+		input type="radio" name="relevance" class="mll" value="medium" Medium
+		input type="radio" name="relevance" class="mll" value="low" Low
+	p
+		b.mrl.w100.db.fl Privacy
+		input type="radio" name="privacy" class="mll" value="public" Public
+		input type="radio" name="privacy" class="mll" value="confidential" Confidential
+		input type="radio" name="privacy" class="mll" value="private confidential" Private And Confidential
+	p
+		= f.submit "Upload", :class=>"btn btn-success fl"
+		= link_to 'Cancel', '#', :title =>"Close",:class => 'hide_file_comments btn fl mll', :post_id => "#{p.id}"
+		.clearfix
 
 	.clearfix
 	

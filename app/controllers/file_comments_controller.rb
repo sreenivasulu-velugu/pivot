@@ -7,7 +7,25 @@ before_filter :authenticate_user!
   def create
     #render :text => params.inspect;return
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create!(params[:comment])
+    if params[:file_name]["upload"] != "" and params[:file_comment][:doc_file].original_filename != ""
+        file_name = params[:file_name]["upload"].gsub(/[^0-9A-Za-z]/, '')
+        #.to_s.gsub(" ","_")
+        fileext = params[:file_comment][:doc_file].original_filename.strip.split(".").last
+        file_name = "#{file_name}"+".#{fileext}"
+        #render :text =>file_name.inspect;return
+        #@post.update_attribute(:doc_file_name, file_name)
+    end
+    doc_file = params[:file_comment][:doc_file]
+    user_id = params[:file_comment][:user_id]
+    file_type = params[:file_type]
+    relevance = params[:relevance]
+    privacy = params[:privacy]
+    link_url = params[:link_url][:url]
+
+    @file_comment = @post.file_comments.create!(:doc_file => doc_file, :user_id => user_id,
+                                                :file_name => file_name, :file_type => file_type,
+                                                :relevance => relevance, :privacy => privacy,
+                                                :link_url => link_url)
     respond_to do |format|
         format.js {}
         format.json { render :nothing => true, :status => 204 }

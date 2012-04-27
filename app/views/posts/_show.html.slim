@@ -5,15 +5,6 @@ li.item
 		= beautify_params 'Title', p.title, 50
 		= p.content
 		br
-		- if !p.file_comments.blank? && p.file_comments.doc_file.inspect
-			= link_to "Doc File", open_doc_url(p.file_comments.doc_file), :target =>"_blank",:title =>"Relevance: #{p.doc_relevance} and Privacy: #{p.doc_privacy}", :class =>'btn '
-		- if !p.file_comments.blank? && p.file_comments.faq.inspect
-			= link_to "FAQ", open_doc_url(p.file_comments.faq), :target =>"_blank", :class =>'btn '
-	/!	- if !p.file_comments.link_url.blank?
-			= link_to "Shared URL", p.file_comments.link_url,:target =>"_blank", :class =>'btn '
-		
-	/!	- if !p.file_comments.link_url.blank?
-			= link_to image_tag('link.png') +'Shared URL', p.file_comments.link_url,:target =>"_blank", :class =>'btn'
 	
 	.item_links
 		= link_to image_tag('open_post.png') +"Open", post_path(p.id), :class => 'fr mrm'
@@ -53,6 +44,6 @@ ul class="item_children hide" id="comments_#{p.id}"
 
 ul class="item_children hide" id="file_#{p.id}"
 	li 
-		h4.fl Upload File
+		
 		= render :partial => 'file_comments/comment', :locals => { :p => p }
 		.clearfix

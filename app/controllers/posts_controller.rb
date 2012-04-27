@@ -12,13 +12,7 @@ class PostsController < ApplicationController
     unless params[:post].nil?
       
       @post = Post.create(params[:post])
-      if params[:file_name]["upload"] != "" and params[:post][:doc_file].original_filename != ""
-        file_name = params[:file_name]["upload"].to_s.gsub(" ","_")
-        fileext = params[:post][:doc_file].original_filename.strip.split(".").last
-        file_name = "#{file_name}"+".#{fileext}"
-        #render :text =>file_name.inspect;return
-        @post.update_attribute(:doc_file_name, file_name)
-      end  
+      
 
       respond_to do |format|
         format.js {}
