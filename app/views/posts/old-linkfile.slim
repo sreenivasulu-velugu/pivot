@@ -37,3 +37,22 @@ old linkes
 					= f.text_field :link_url, :placeholder =>'Share link URL',:onkeyup=>"url_validate(this.value);"
 					= f.select :link_url_relevance, [["High","High"],["Medium","Medium"],["Low","Low"]],{:prompt => 'Select Relevance'}
 					= f.select :link_url_privacy, [["Public","Public"],["Confidential","Confidential"],["Private & Confidential ","Private_and_Confidential "]],{:prompt => 'Select Privacy'}
+
+
+= link_to "Attach Link URL", '#', :class => "upload_link_url_comments fr mrm", :post_id => "#{p.id}"
+	= link_to "Upload FAQ", '#', :class => "upload_faq_comments fr mrm", :post_id => "#{p.id}"
+	= link_to "Upload Files", '#', :class => "upload_file_comments fr mrm", :post_id => "#{p.id}"
+	
+	ul class="item_children hide" id="link_url_file_#{p.id}"
+		li 
+			= render :partial => 'file_comments/link_url_comment', :locals => { :f => f }
+			.clearfix		
+
+	ul class="item_children hide" id="upload_faq_#{p.id}"
+		li 
+			= render :partial => 'file_comments/faq_comment', :locals => { :f => f }
+			.clearfix
+
+	ul class="item_children hide" id="upload_file_#{p.id}"
+		li 
+			= render :partial => 'file_comments/file_comment', :locals => { :f => f }

@@ -1,27 +1,40 @@
 - if p.file_comments.size == 0
 	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_file_comments fr mrm', :post_id => "#{p.id}"
 
+
 br
 = form_for [p, FileComment.new], :multipart => true do |f|
 	= f.hidden_field "user_id", :value => p.user.id
-	= link_to "Attach Link URL", '#', :class => "upload_link_url_comments fr mrm", :post_id => "#{p.id}"
-	= link_to "Upload FAQ", '#', :class => "upload_faq_comments fr mrm", :post_id => "#{p.id}"
-	= link_to "Upload Files", '#', :class => "upload_file_comments fr mrm", :post_id => "#{p.id}"
+
+	label class="cp fl mrm" onclick="if(document.getElementById('showFile').checked){document.getElementById('dateTable').style.display='none';ajaxpage('search/farmers/view_all_q.php?farmerId=<?php echo $farmerId; ?>','getResults');}"
+	input type="radio" name="file_type" id="showFile" File 
+
+	label class="cp fl mrm" onclick="if(document.getElementById('showFile').checked){document.getElementById('dateTable').style.display='block';document.getElementById('getResults').innerHTML='';}"
+	input type="radio" name="file_type" id="showFile" FAQ
+
+	label class="cp fl mrm" onclick="if(document.getElementById('showLink').checked){document.getElementById('dateTable').style.display='block';document.getElementById('getResults').innerHTML='';}"
+	input type="radio" name="file_type" id="showLink" Link
+
 	
-	ul class="item_children hide" id="link_url_file_#{p.id}"
-		li 
-			= render :partial => 'file_comments/link_url_comment', :locals => { :f => f }
-			.clearfix		
+	br
+	= text_field "file_name","upload",:placeholder =>'Enter File Name'
+	.btn.btn-success.upload_container
+		|	upload file
+  		= f.file_field :doc_file
+	br
+	b Relevance
+	input type="radio" name="relevance" High
+	input type="radio" name="relevance" Medium
+	input type="radio" name="relevance" Low
+	br
+	b Privacy
+	input type="radio" name="privacy" Public
+	input type="radio" name="privacy" Confidential
+	input type="radio" name="privacy" Private And Confidential
+	br
+	= f.submit "Upload", :class=>"btn btn-success"
 
-	ul class="item_children hide" id="upload_faq_#{p.id}"
-		li 
-			= render :partial => 'file_comments/faq_comment', :locals => { :f => f }
-			.clearfix
-
-	ul class="item_children hide" id="upload_file_#{p.id}"
-		li 
-			= render :partial => 'file_comments/file_comment', :locals => { :f => f }
-			.clearfix
+	.clearfix
 	
 	
 

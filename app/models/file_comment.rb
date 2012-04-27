@@ -4,8 +4,7 @@ class FileComment
   mount_uploader :doc_file , DocUploader
   field :doc_relevance
   field :doc_privacy
-
-  mount_uploader :faq, FaqUploader
+  field :type
   field :faq_relevance
   field :faq_privacy
 

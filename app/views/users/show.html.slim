@@ -83,7 +83,7 @@
 						- else
 							- @user.following_pivots.each do |p|
 								- post = Post.find(p)
-								= render :partial =>'users/followed_pivots', :locals => {:p => post}
+								= render :partial => 'users/followed_pivots', :locals => {:p => post}
 				- elsif params[:like]
 						h3 Likes
 						- if @user.likes.blank?
@@ -91,9 +91,9 @@
 						- else
 							- @user.likes.each do |p|
 								- post = Post.find(p)
-								= render :partial =>'users/likes', :locals => {:p => post}
+								= render :partial => 'users/likes', :locals => {:p => post}
 				- else
 						h3 Pivots
 						- @posts.each do |post|
-							= render :partial =>'posts/show', :locals => { :p => post }
+							= render :partial => 'posts/show', :locals => { :p => post }
 						= paginate @posts, :theme => 'more', :params => { :controller => 'users', :action => 'show', :more => true }
