@@ -1,35 +1,45 @@
-/ .content_white
-/ 	ul
-/ 		li.item
-/ 			.pic= user_image @post.user, 60
-/ 			div.fl
-/ 				= link_user @post.user, :class => 'fb'
-/ 				= beautify_params 'Title', @post.title, 50
-/ 				= @post.content
-/ 			.clearfix
-/ 			br
-/ 			- if @post.doc.inspect
-/ 				= link_to 'Document File', open_doc_url(@post.doc),:target =>"_blank"
-/ 			br
-/ 			- if @post.link_url
-/ 				= link_to 'Shared Link URL', @post.link_url,:target =>"_blank" 
+- p = @post
+li.item
+	.pic= user_image p.user, 60
+	.item_content
+		= link_user p.user, :class => 'fb'
+		= beautify_params 'Title', p.title, 50
+		= p.content
+		br
+	
+	.item_links
+		= link_to image_tag('open_post.png') +"Open", post_path(p.id), :class => 'fr mrm'
+		- if current_user.following_pivots.include?(p.id)
+			= link_to "Unfollow", unfollow_pivot_user_path(p.id), :class => 'fr mrm'
+		- else
+			= link_to "Follow", follow_pivot_user_path(p.id), :class => 'fr mrm'
 
-/ 	ul class="item_children hide" id="comments_#{@post.id}"
-/ 	- if @post.comments.size > 0
-/ 		li 
-/ 			h4.fl Comments
-/ 			/!= link_to 'Hide', '#', :class => 'hide_comments fr mrm', :post_id => "#{@post.id}"
-/ 			.clearfix
+		- if current_user.likes.include?(p.id)
+			= link_to image_tag('like.png') +"Unlike", unlike_post_user_path(p.id), :class => 'fr mrm'
+		- else
+			= link_to image_tag('like.png') +"Like", like_post_user_path(p.id), :class => 'fr mrm'
 
-/ 			- for comment in @post.comments.order_by([:created_at,:desc])
-/ 				li
-/ 					.pic= user_image comment.user, 40
-/ 					.item_content= comment.content
-/ 					span.light_text.fr= time_ago_in_words(comment.created_at)
-/ 					.clearfix
-/ 		li.left_form id="comments_head"
-/ 		= render :partial =>'comments/comment', :locals =>{ :p => @post}		
+		= link_to image_tag('add_comment.png') +"Comments", '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
+		
+		= link_to image_tag('upload.jpg') +"Upload", '#', :class => "file_comments fr mrm", :post_id => "#{p.id}"
+	.clearfix
 
-/ 	
-.content_white
-	= render :partial => 'posts/show', :locals => { :p => @post }
+ul class="item_children " id="comments_#{p.id}"
+	li.left_form id="comments_head"
+		= render :partial =>'comments/show_comments', :locals =>{:p => p}
+		.clearfix
+ul class="item_children hide" id="comments_#{p.id}"
+	li.left_form id="comments_head"
+		= render :partial =>'comments/show_comments', :locals =>{:p => p}
+		= render :partial => 'comments/comment', :locals => { :p => p }
+		.clearfix
+
+ul class="item_children" id="file_#{p.id}"
+	li.left_form id="comments_head" 
+		= render :partial =>'file_comments/show_file_comments', :locals =>{:p => p}
+		.clearfix
+ul class="item_children hide" id="file_#{p.id}"
+	li.left_form id="comments_head" 
+		= render :partial =>'file_comments/show_file_comments', :locals =>{:p => p}
+		= render :partial => 'file_comments/comment', :locals => { :p => p }
+		.clearfix

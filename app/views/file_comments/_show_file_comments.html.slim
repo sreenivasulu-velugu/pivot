@@ -1,0 +1,22 @@
+- if p.file_comments.size > 0
+	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_file_comments fr mrm', :post_id => "#{p.id}"
+	h4.fl Uploaded Files
+	.clearfix
+	- for comment in p.file_comments.order_by([:created_at,:desc])
+		li
+			.pic= user_image comment.user, 40
+			.item_content= link_user comment.user, :class => 'fb'
+			- if comment.file_type
+				p has uploaded "#{comment.file_type}"
+			- if comment.link_url != ""
+				= comment.link_url
+			- else
+				- if comment.file_name != ""
+					= link_to comment.file_name, open_doc_url(comment.doc_file), :target =>"_blank"
+
+			span.light_text.fr= time_ago_in_words(comment.created_at)
+			br
+			b Relevance "#{comment.relevance}"
+			br
+			b Privacy "#{comment.privacy}"
+			.clearfix

@@ -5,15 +5,6 @@ li.item
 		= beautify_params 'Title', p.title, 50
 		= p.content
 		br
-		- if !p.file_comments.blank? && p.file_comments.doc_file.inspect
-			= link_to "Doc File", open_doc_url(p.file_comments.doc_file), :target =>"_blank",:title =>"Relevance: #{p.doc_relevance} and Privacy: #{p.doc_privacy}", :class =>'btn '
-		- if !p.file_comments.blank? && p.file_comments.faq.inspect
-			= link_to "FAQ", open_doc_url(p.file_comments.faq), :target =>"_blank", :class =>'btn '
-	/!	- if !p.file_comments.link_url.blank?
-			= link_to "Shared URL", p.file_comments.link_url,:target =>"_blank", :class =>'btn '
-		
-	/!	- if !p.file_comments.link_url.blank?
-			= link_to image_tag('link.png') +'Shared URL', p.file_comments.link_url,:target =>"_blank", :class =>'btn'
 	
 	.item_links
 		= link_to image_tag('open_post.png') +"Open", post_path(p.id), :class => 'fr mrm'
@@ -27,32 +18,22 @@ li.item
 		- else
 			= link_to image_tag('like.png') +"Like", like_post_user_path(p.id), :class => 'fr mrm'
 
-		- if current_user == p.user
-			/!= link_to image_tag('delete.png'), post_path(p.id), :class => 'fr mrm'
-
 		= link_to image_tag('add_comment.png') +"Comments", '#', :class => "view_comments fr mrm", :post_id => "#{p.id}"
 		
 		= link_to image_tag('upload.jpg') +"Upload", '#', :class => "file_comments fr mrm", :post_id => "#{p.id}"
 	.clearfix
 
 ul class="item_children hide" id="comments_#{p.id}"
-	- if p.comments.size > 0
-		li 
-			h4.fl Comments
-			= link_to image_tag('close.png'), '#',:title =>"Close", :class => 'hide_comments fr mrm', :post_id => "#{p.id}"
-			.clearfix
-
-			- for comment in p.comments.order_by([:created_at,:desc])
-				li
-					.pic= user_image comment.user, 40
-					.item_content= comment.content
-					span.light_text.fr= time_ago_in_words(comment.created_at)
-					.clearfix
 	li.left_form id="comments_head"
+		= render :partial =>'comments/show_comments', :locals =>{:p => p}
 		= render :partial => 'comments/comment', :locals => { :p => p }
+		.clearfix
 
 ul class="item_children hide" id="file_#{p.id}"
-	li 
-		h4.fl Upload File
+	li.left_form id="comments_head" 
+		= render :partial =>'file_comments/show_file_comments', :locals =>{:p => p}
 		= render :partial => 'file_comments/comment', :locals => { :p => p }
 		.clearfix
+
+javascript:
+	clear_pivot_form();

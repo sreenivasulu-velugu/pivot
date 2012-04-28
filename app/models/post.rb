@@ -1,6 +1,7 @@
 
 #require 'carrierwave/orm/mongoid'
 class Post
+  
   include Mongoid::Document
   include Mongoid::Timestamps
   field :title

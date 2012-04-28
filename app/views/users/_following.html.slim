@@ -6,7 +6,7 @@
 			.pull-left
 				= user_image user, 60
 			
-			.span4.pull-left
+			.span3.pull-left
 				- if user == current_user
 					= link_to user.name, edit_user_path, :class => 'fb'
 				- else

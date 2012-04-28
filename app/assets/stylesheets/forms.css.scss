@@ -25,3 +25,13 @@
 .right_form textarea {
 	@include right_post;
 }
+
+.upload_container {
+	input[type="file"] {
+		position: absolute;
+		left: 0px;
+		top: -3px;
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+}
