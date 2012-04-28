@@ -6,6 +6,12 @@
 	max-width: 620px;
 }
 
+@mixin left_post_full {
+	min-width: 905px;
+	width: 905px;
+	max-width: 905px;
+}
+
 @mixin right_post {
 	min-width: 280px;
 	width: 280px;
@@ -17,6 +23,13 @@
 .left_form select,
 .left_form textarea {
 	@include left_post;
+}
+
+.left_form_full input[type="text"],
+.left_form_full input[type="password"],
+.left_form_full select,
+.left_form_full textarea {
+	@include left_post_full;
 }
 
 .right_form input[type="text"],

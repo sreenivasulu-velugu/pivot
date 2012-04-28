@@ -23,11 +23,18 @@ li.item
 		= link_to image_tag('upload.jpg') +"Upload", '#', :class => "file_comments fr mrm", :post_id => "#{p.id}"
 	.clearfix
 
-ul class="item_children hide" id="comments_#{p.id}"
-	li.left_form id="comments_head"
+- if defined? page
+	ul class="item_children" id="comments_#{p.id}"
+		= render :partial =>'comments/show_comments', :locals => { :p => p, :page => page }
+		li.left_form_full id="comments_head"
+			= render :partial => 'comments/comment', :locals => { :p => p, :page => page }
+			.clearfix
+- else
+	ul class="item_children hide" id="comments_#{p.id}"
 		= render :partial =>'comments/show_comments', :locals =>{:p => p}
-		= render :partial => 'comments/comment', :locals => { :p => p }
-		.clearfix
+		li.left_form id="comments_head"
+			= render :partial => 'comments/comment', :locals => { :p => p }
+			.clearfix
 
 ul class="item_children hide" id="file_#{p.id}"
 	li.left_form id="comments_head" 

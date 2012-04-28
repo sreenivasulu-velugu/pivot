@@ -1,11 +1,22 @@
 - if p.comments.size > 0
-	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_comments fr mrm', :post_id => "#{p.id}"
-	h4.fl Comments
-	.clearfix
+	li
+		= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_comments fr mrm', :post_id => "#{p.id}"
+		h4.fl Comments
+		.clearfix
 	- for comment in p.comments.order_by([:created_at,:desc])
-		li
-			.pic= user_image comment.user, 40
-			.item_content= link_user comment.user, :class => 'fb'
-			p= comment.content
-			span.light_text.fr= time_ago_in_words(comment.created_at)
-			.clearfix
+		- if defined? page
+			li.left_form_full id="comments_head"
+				.pic= user_image comment.user, 40
+				.item_content_full
+					div= link_user comment.user, :class => 'fb'
+					p= comment.content
+					span.light_text.fr= time_ago_in_words(comment.created_at)
+				.clearfix
+		- else
+			li.left_form id="comments_head"
+				.pic= user_image comment.user, 40
+				.item_content
+					div= link_user comment.user, :class => 'fb'
+					p= comment.content
+					span.light_text.fr= time_ago_in_words(comment.created_at)
+				.clearfix

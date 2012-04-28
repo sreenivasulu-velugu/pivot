@@ -4,7 +4,7 @@
 h4 New Comment
 br
 = form_for [p, Comment.new] do |f|
-			= f.hidden_field "user_id", :value => p.user.id
-			= f.text_area :content, :rows => 2, :placeholder => 'Comment here...!'
-			= f.submit "Comment", :class =>"btn btn-primary fr"
-			.clearfix
+	= f.hidden_field "user_id", :value => p.user.id
+	= f.text_area :content, :rows => 2, :placeholder => 'Comment here...!'
+	= f.submit "Comment", :class =>"btn btn-primary fr"
+	.clearfix

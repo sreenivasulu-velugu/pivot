@@ -12,6 +12,9 @@
 @mixin item_children_border {
 	border-bottom: 1px solid #E0E0E0;
 }
+@mixin list_item {
+	list-style: none;
+}
 form {
 	margin: 0px !important;
 }
@@ -20,10 +23,14 @@ input[type='text'] {
 	height: 27px;
 }
 
+li {
+	@include list_item;
+}
+
 ul {
 	margin: 0 auto;
 	li {
-		list-style: none;
+		@include list_item;
 	}
 }
 
@@ -92,6 +99,10 @@ ul > li.item {
 		width: 545px;
 		@include fl;
 	}
+	.item_content_full {
+		width: 850px;
+		@include fl;
+	}
 	.item_links {
 		@include absolute;
 		top: 0px;
@@ -115,6 +126,10 @@ ul.item_children > li {
 	}
 	.item_content {
 		width: 565px;
+		@include fl;
+	}
+	.item_content_full {
+		width: 850px;
 		@include fl;
 	}
 }
