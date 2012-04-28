@@ -35,11 +35,12 @@ li.item
 			li.left_form id="comments_head"
 				= render :partial => 'comments/comment', :locals => { :p => p }
 				.clearfix
-
+	
 	ul class="item_children hide" id="file_#{p.id}"
 		li.left_form id="comments_head" 
 			= render :partial =>'file_comments/show_file_comments', :locals =>{:p => p}
-			= render :partial => 'file_comments/comment', :locals => { :p => p }
+			li.left_form id="comments_head"
+				= render :partial => 'file_comments/comment', :locals => { :p => p }
 			.clearfix
 
 javascript:
