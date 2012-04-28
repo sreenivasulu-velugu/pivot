@@ -1,6 +1,6 @@
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.2'
 gem "bson_ext", ">= 1.6.1"
