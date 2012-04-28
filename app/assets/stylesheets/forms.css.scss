@@ -1,15 +1,15 @@
 @import 'mixins';
 
 @mixin left_post {
-	min-width: 620px;
-	width: 620px;
-	max-width: 620px;
+	min-width: 596px;
+	width: 596px;
+	max-width: 596px;
 }
 
 @mixin left_post_full {
-	min-width: 905px;
-	width: 905px;
-	max-width: 905px;
+	min-width: 887px;
+	width: 887px;
+	max-width: 887px;
 }
 
 @mixin right_post {
@@ -18,8 +18,6 @@
 	max-width: 280px;
 }
 
-.left_form input[type="text"],
-.left_form input[type="password"],
 .left_form select,
 .left_form textarea {
 	@include left_post;
@@ -47,4 +45,10 @@
 		opacity: 0;
 		filter: alpha(opacity=0);
 	}
+}
+
+.radio_label {
+	cursor: pointer;
+	@include fl;
+	@include ml10;
 }

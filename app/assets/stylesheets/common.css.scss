@@ -87,7 +87,7 @@ ul {
 	clear: both;
 }
 
-ul > li.item {
+li.item {
 	@include relative;
 	@include p10;
 	@include item_border;
@@ -100,7 +100,7 @@ ul > li.item {
 		@include fl;
 	}
 	.item_content_full {
-		width: 850px;
+		width: 835px;
 		@include fl;
 	}
 	.item_links {
@@ -115,25 +115,50 @@ ul > li.item {
 		@include db;
 	}
 }
+ul li.item:hover {
+	@include highlight;
+}
 
-ul.item_children > li {
-	@include p10;
-	@include item_children_border;
-	background: $commets_white;
-	.pic {
-		@include mr10;
-		@include fl;
+ul.item_children {
+	@include pt10;
+	li {
+		@include p10;
+		@include item_children_border;
+		background: $commets_white;
+		.pic {
+			@include mr10;
+			@include fl;
+		}
+		.item_content {
+			width: 545px;
+			@include fl;
+		}
+		.item_content_full {
+			width: 835px;
+			@include fl;
+		}
+		&:first-child {
+			-moz-border-radius: 5px 5px 0px 0px;
+			-webkit-border-radius: 5px 5px 0px 0px;
+			border-radius: 5px 5px 0px 0px;
+		}
+		&:last-child {
+			-moz-border-radius: 0px 0px 5px 5px;
+			-webkit-border-radius: 0px 0px 5px 5px;
+			border-radius: 0px 0px 5px 5px;
+		}
 	}
-	.item_content {
-		width: 565px;
-		@include fl;
-	}
-	.item_content_full {
-		width: 850px;
-		@include fl;
+	li.single {
+		-moz-border-radius: 5px 5px 5px 5px !important;
+		-webkit-border-radius: 5px 5px 5px 5px !important;
+		border-radius: 5px 5px 5px 5px !important;
 	}
 }
 
 .fb {
 	@include fb;
+}
+
+.highlight {
+	@include highlight;
 }

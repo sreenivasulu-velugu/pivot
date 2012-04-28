@@ -1,26 +1,15 @@
 - if p.file_comments.size == 0
 	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_file_comments fr mrm', :post_id => "#{p.id}"
-br
 h4.fl Upload
+.clearfix
 
 = form_for [p, FileComment.new], :multipart => true do |f|
 	= f.hidden_field "user_id", :value => p.user.id
 	div.mtm
-		.fl.mrl
-			label class="toggle_type cp fl mll" for="show_file_#{p.id}" id="#{p.id}"
-				input type="radio" name="file_type" id="show_file_#{p.id}" class="fl" value="file" checked="checked"
-				| File
-			.clearfix
-		.fl.mrl
-			label class="toggle_type cp fl mll" for="show_faq_#{p.id}" id="#{p.id}"
-				input type="radio" name="file_type" id="show_faq_#{p.id}" class="fl" value="faq"
-				| FAQ
-			.clearfix 
-		.fl.mrl
-			label class="toggle_type cp fl mll" for="show_link_#{p.id}" id="#{p.id}"
-				input type="radio" name="file_type" id="show_link_#{p.id}" class="fl" value="link"
-				| Link
-			.clearfix
+		.mrl.w100.db.fl.fb Type
+		= labeled_radio "show_file_#{p.id}", 'file_type', 'file', 80, 'toggle_type', p.id
+		= labeled_radio "show_faq_#{p.id}", 'file_type', 'faq', 80, 'toggle_type', p.id
+		= labeled_radio "show_link_#{p.id}", 'file_type', 'link', 80, 'toggle_type', p.id
 		.clearfix
 
 	div id="file_upload_#{p.id}"
@@ -32,16 +21,20 @@ h4.fl Upload
 
 	div id="link_upload_#{p.id}" style="display:none;"
 		= text_field "link_url", 'url', :placeholder => 'Enter your link'
-	p.mts
-		b.mrl.w100.db.fl Relevance
-		input type="radio" name="relevance" class="mll" value="high" High
-		input type="radio" name="relevance" class="mll" value="medium" Medium
-		input type="radio" name="relevance" class="mll" value="low" Low
-	p
-		b.mrl.w100.db.fl Privacy
-		input type="radio" name="privacy" class="mll" value="public" Public
-		input type="radio" name="privacy" class="mll" value="confidential" Confidential
-		input type="radio" name="privacy" class="mll" value="private confidential" Private And Confidential
+	.mts
+		.mrl.w100.db.fl.fb Relevance
+		= labeled_radio "high_#{p.id}", 'relevance', 'high', 80
+		= labeled_radio "medium_#{p.id}", 'relevance', 'medium', 120
+		= labeled_radio "low_#{p.id}", 'relevance', 'low', 150
+		.clearfix
+
+	.mts
+		.mrl.w100.db.fl.fb Privacy
+		= labeled_radio "public_#{p.id}", 'privacy', 'public', 80
+		= labeled_radio "confidential_#{p.id}", 'privacy', 'confidential', 120
+		= labeled_radio "private_confidential_#{p.id}", 'privacy', 'private confidential', 150
+		.clearfix
+
 	p
 		= f.submit "Upload", :class=>"btn btn-success fl"
 		= link_to 'Cancel', '#', :title =>"Close",:class => 'hide_file_comments btn fl mll', :post_id => "#{p.id}"

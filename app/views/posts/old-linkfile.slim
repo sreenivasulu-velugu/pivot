@@ -91,3 +91,36 @@ old linkes
 		
 		- if !p.link_url.blank?
 			= link_to image_tag('link.png') +'Shared URL', p.link_url,:target =>"_blank", :class =>'btn'
+
+			br
+
+		label for="high_#{p.id}" class="cp fl mll"
+			input type="radio" name="relevance" class="mll fl" value="high" id="high_#{p.id}"
+			span.mls.fl High
+			.clearfix
+		label for="high_#{p.id}" class="cp fl mll"
+			input type="radio" name="relevance" class="mll fl" value="medium" id="meidum_#{p.id}"
+			span.mls.fl Medium
+			.clearfix
+		label for="high_#{p.id}" class="cp fl mll"
+			input type="radio" name="relevance" class="mll fl" value="low" id="low_#{p.id}"
+			span.mls.fl Low
+			.clearfix
+
+
+
+		.fl.mrl
+			label class="toggle_type cp fl mll" for="show_file_#{p.id}" id="#{p.id}"
+				input type="radio" name="file_type" id="show_file_#{p.id}" class="fl" value="file" checked="checked"
+				| File
+			.clearfix
+		.fl.mrl
+			label class="toggle_type cp fl mll" for="show_faq_#{p.id}" id="#{p.id}"
+				input type="radio" name="file_type" id="show_faq_#{p.id}" class="fl" value="faq"
+				| FAQ
+			.clearfix 
+		.fl.mrl
+			label class="toggle_type cp fl mll" for="show_link_#{p.id}" id="#{p.id}"
+				input type="radio" name="file_type" id="show_link_#{p.id}" class="fl" value="link"
+				| Link
+			.clearfix

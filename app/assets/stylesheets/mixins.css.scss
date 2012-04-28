@@ -174,3 +174,9 @@ $commets_white: #F0F0F0;
 .no_margin_strict {
 	margin: 0px !important;
 }
+@mixin highlight {
+	border: 1px solid #999;
+	-moz-box-shadow: 0px 0px 5px #999;
+	-webkit-box-shadow: 0px 0px 5px #999;
+	box-shadow: 0px 0px 5px #999;
+}

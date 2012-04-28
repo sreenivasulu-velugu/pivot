@@ -40,6 +40,14 @@ end
 		else  
 		  url = "http://#{request.host}:#{request.port}#{field}"
 		end
-	end  
+	end
+
+	def labeled_radio id, name, value, width = 100, toggle_type = "", label_id = nil
+		input = raw("<input type='radio' name='#{name}' value='#{value}' class='mll fl' id='#{id}' />")
+		span = content_tag 'span', value.capitalize, :class => 'mls fl'
+		clearfix = content_tag 'div', ' ', :class => 'clearfix'
+		
+		content_tag 'label', input + span + clearfix, :for => id, :class => "radio_label #{toggle_type}", :style => "width: #{width}px;", :id => label_id
+	end
 
 end
