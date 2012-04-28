@@ -1,5 +1,6 @@
 - if p.comments.size == 0
 	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_comments fr mrm', :post_id => "#{p.id}"
+
 h4 New Comment
 br
 = form_for [p, Comment.new] do |f|

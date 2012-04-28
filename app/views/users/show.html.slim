@@ -2,7 +2,7 @@
 	.pull-left
 		= user_image @user
 	
-	.span4.pull-left
+	.span6.pull-left
 		- if @user == current_user
 			h3= link_to @user.name, @user
 		- else
@@ -83,7 +83,7 @@
 						- else
 							- @user.following_pivots.each do |p|
 								- post = Post.find(p)
-								= render :partial => 'users/followed_pivots', :locals => {:p => post}
+								= render :partial => 'posts/show', :locals => {:p => post}
 				- elsif params[:like]
 						h3 Likes
 						- if @user.likes.blank?
@@ -91,7 +91,7 @@
 						- else
 							- @user.likes.each do |p|
 								- post = Post.find(p)
-								= render :partial => 'users/likes', :locals => {:p => post}
+								= render :partial => 'posts/show', :locals => {:p => post}
 				- else
 						h3 Pivots
 						- @posts.each do |post|

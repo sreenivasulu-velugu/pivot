@@ -1,32 +1,8 @@
 - if p.file_comments.size == 0
 	= link_to image_tag('close.png'), '#', :title =>"Close",:class => 'hide_file_comments fr mrm', :post_id => "#{p.id}"
-- if p.file_comments.size > 0
-	h4.fl Uploaded Files
-	br
-ul
-	- for comment in p.file_comments.order_by([:created_at,:desc])
-		li
-			.pic= user_image comment.user, 40
-			.item_content= link_user comment.user, :class => 'fb'
-			- if comment.file_type
-				p has uploaded "#{comment.file_type}"
-			- if comment.link_url != ""
-				= comment.link_url
-			- else
-				- if comment.file_name != ""
-					= link_to comment.file_name, open_doc_url(comment.doc_file), :target =>"_blank"
-
-			span.light_text.fr= time_ago_in_words(comment.created_at)
-			br
-			b Relevance "#{comment.relevance}"
-			br
-			b Privacy "#{comment.privacy}"
-			hr
-			.clearfix
-
 br
 h4.fl Upload
-hr
+
 = form_for [p, FileComment.new], :multipart => true do |f|
 	= f.hidden_field "user_id", :value => p.user.id
 	div.mtm
@@ -51,7 +27,7 @@ hr
 		= text_field "file_name","upload",:placeholder =>'Enter File Name', :class => 'fl'
 		.btn.btn-success.upload_container.fl.mlm
 			| Select File
-			= f.file_field :doc_file
+			= f.file_field :doc_file, :size => '1', :class => 'blah'
 		.clearfix
 
 	div id="link_upload_#{p.id}" style="display:none;"
@@ -70,9 +46,4 @@ hr
 		= f.submit "Upload", :class=>"btn btn-success fl"
 		= link_to 'Cancel', '#', :title =>"Close",:class => 'hide_file_comments btn fl mll', :post_id => "#{p.id}"
 		.clearfix
-
-	.clearfix
-	
-	
-
 	

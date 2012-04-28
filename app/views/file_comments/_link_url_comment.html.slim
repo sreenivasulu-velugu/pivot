@@ -1,9 +1,0 @@
-h4.fl Attach Link Url
-br
-= f.text_field :link_url, :placeholder =>'Share link URL',:onkeyup=>"url_validate(this.value);"
-br
-= f.select :link_url_relevance, [["High","High"],["Medium","Medium"],["Low","Low"]],{:prompt => 'Select Relevance'}
-br
-= f.select :link_url_privacy, [["Public","Public"],["Confidential","Confidential"],["Private & Confidential ","Private_and_Confidential "]],{:prompt => 'Select Privacy'}
-br
-= f.submit "Upload", :class =>"btn btn-primary"

@@ -16,7 +16,7 @@ before_filter :authenticate_user!
         #@post.update_attribute(:doc_file_name, file_name)
     end
     doc_file = params[:file_comment][:doc_file]
-    user_id = params[:file_comment][:user_id]
+    user_id =  current_user.id #params[:file_comment][:user_id]
     file_type = params[:file_type]
     relevance = params[:relevance]
     privacy = params[:privacy]
